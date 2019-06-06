@@ -10,25 +10,31 @@ public class Deposit {
 
     @Id
     @GeneratedValue
-    Long id;
-    String type;
-    String transaction_date;
-    String status;
-    Long payee_id;
-    String medium;
-    Double amount;
-    String description;
+    private Long id;
+
+    private enum type {
+        p2p, deposit, withdraws
+    }
+
+    private String transaction_date;
+    private String status;
+    private Long payee_id;
+
+    private enum medium {
+        balance, rewards
+    }
+
+    private Double amount;
+    private String description;
 
     public Deposit() {
     }
 
-    public Deposit(Long id, String type, String transaction_date, String status, Long payee_id, String medium, Double amount, String description) {
+    public Deposit(Long id, String transaction_date, String status, Long payee_id, Double amount, String description) {
         this.id = id;
-        this.type = type;
         this.transaction_date = transaction_date;
         this.status = status;
         this.payee_id = payee_id;
-        this.medium = medium;
         this.amount = amount;
         this.description = description;
     }
@@ -39,14 +45,6 @@ public class Deposit {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getTransaction_date() {
@@ -73,14 +71,6 @@ public class Deposit {
         this.payee_id = payee_id;
     }
 
-    public String getMedium() {
-        return medium;
-    }
-
-    public void setMedium(String medium) {
-        this.medium = medium;
-    }
-
     public Double getAmount() {
         return amount;
     }
@@ -101,11 +91,9 @@ public class Deposit {
     public String toString() {
         return "Deposit{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
                 ", transaction_date='" + transaction_date + '\'' +
                 ", status='" + status + '\'' +
                 ", payee_id=" + payee_id +
-                ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';

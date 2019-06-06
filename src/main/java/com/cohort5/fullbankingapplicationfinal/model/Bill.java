@@ -10,22 +10,23 @@ public class Bill {
     @Id
     @GeneratedValue
     Long id;
-    String status;
-    String payee;
-    String nickname;
-    String creation_date;
-    String payment_date;
-    Integer recurring_date;
-    String upcoming_payment_date;
-    Double payment_amount;
-    String account_id;
+    private enum status {
+        pending, cancelled, completed, reccuring
+    }
+    private String payee;
+    private String nickname;
+    private String creation_date;
+    private String payment_date;
+    private Integer recurring_date;
+    private String upcoming_payment_date;
+    private Double payment_amount;
+    private String account_id;
 
     public Bill() {
     }
 
-    public Bill(Long id, String status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
+    public Bill(Long id, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
         this.id = id;
-        this.status = status;
         this.payee = payee;
         this.nickname = nickname;
         this.creation_date = creation_date;
@@ -42,14 +43,6 @@ public class Bill {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getPayee() {
@@ -120,7 +113,6 @@ public class Bill {
     public String toString() {
         return "Bill{" +
                 "id=" + id +
-                ", status='" + status + '\'' +
                 ", payee='" + payee + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", creation_date='" + creation_date + '\'' +

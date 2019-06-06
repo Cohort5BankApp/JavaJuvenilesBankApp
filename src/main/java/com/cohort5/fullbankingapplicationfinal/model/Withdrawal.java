@@ -9,25 +9,27 @@ public class Withdrawal {
 
     @Id
     @GeneratedValue
-    Long id;
-    String type;
-    String transaction_date;
-    String status;
-    Long payer_id;
-    String medium;
-    Double amount;
-    String description;
+    private Long id;
+    private enum type{
+        p2p, deposit, withdrawal
+    }
+    private String transaction_date;
+    private String status;
+    private Long payer_id;
+    private enum medium{
+        balance, rewards
+    }
+    private Double amount;
+    private String description;
 
     public Withdrawal() {
     }
 
-    public Withdrawal(Long id, String type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description) {
+    public Withdrawal(Long id, String transaction_date, String status, Long payer_id, Double amount, String description) {
         this.id = id;
-        this.type = type;
         this.transaction_date = transaction_date;
         this.status = status;
         this.payer_id = payer_id;
-        this.medium = medium;
         this.amount = amount;
         this.description = description;
     }
@@ -38,14 +40,6 @@ public class Withdrawal {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getTransaction_date() {
@@ -72,14 +66,6 @@ public class Withdrawal {
         this.payer_id = payer_id;
     }
 
-    public String getMedium() {
-        return medium;
-    }
-
-    public void setMedium(String medium) {
-        this.medium = medium;
-    }
-
     public Double getAmount() {
         return amount;
     }
@@ -100,11 +86,9 @@ public class Withdrawal {
     public String toString() {
         return "Withdrawal{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
                 ", transaction_date='" + transaction_date + '\'' +
                 ", status='" + status + '\'' +
                 ", payer_id=" + payer_id +
-                ", medium='" + medium + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';
