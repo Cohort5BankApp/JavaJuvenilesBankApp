@@ -34,7 +34,32 @@ public class WithdrawalController {
         withdrawalService.createWithdrawal(account_id,withdrawal);
         Optional<Withdrawal> optional = withdrawalService.getWithdrawalById(withdrawal.getId());
         if(!optional.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND)
+            throw new HttpException(HttpStatus.NOT_FOUND, "Error creating withdrawal");
+        if(optional.isPresent())
+            throw new HttpException(HttpStatus.CREATED, "Success");
+        return optional;
+    }
+
+    @RequestMapping(path = "/{withdrawal}", method = RequestMethod.PUT)
+    public Optional<Withdrawal> updateWithdrawal(@PathVariable Long account_id, @PathVariable Withdrawal withdrawal) {
+        withdrawalService.updateWithdrawal(account_id, withdrawal);
+        Optional<Withdrawal> optional = withdrawalService.getWithdrawalById(withdrawal.getId());
+        if(!optional.isPresent())
+            throw new HttpException(HttpStatus.NOT_FOUND, "Withdrawal ID does not exist");
+        if(optional.isPresent())
+            throw new HttpException(HttpStatus.OK, "Success");
+        return optional;
+    }
+
+    @RequestMapping(path = "/withdrawal/{withdrawlId}", method = RequestMethod.GET)
+    public Optional<Withdrawal> deleteWithdrawal(@PathVariable Long account_id, @PathVariable Long withdrawal_id, @PathVariable Withdrawal withdrawal) {
+        withdrawalService.deleteWithdrawal(account_id, withdrawal_id);
+        Optional optional = withdrawalService.getWithdrawalById(withdrawal.getId());
+        if(!optional.isPresent())
+            throw new HttpException(HttpStatus.NOT_FOUND, "Withdrawal does not exist");
+        if(optional.isPresent())
+            throw new HttpException(HttpStatus.NO_CONTENT, "Success");
+        return optional;
     }
 
 }

@@ -7,7 +7,6 @@ import com.cohort5.fullbankingapplicationfinal.repository.WithdrawalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -46,13 +45,14 @@ public class WithdrawalService {
         account.setBalance(newBalance);
     }
 
-    public ArrayList<Withdrawal> getWithdrawals() {
-        Iterable<Withdrawal> withdrawals = withdrawalRepository.findAll();
-        ArrayList<Withdrawal> all_withdrawals = new ArrayList<>();
-        for(Withdrawal withdrawal : withdrawals) {
-            all_withdrawals.add(withdrawal);
-        }
-        return all_withdrawals;
-    }
+//    Possibly do not need method, saving for future
+//    public ArrayList<Withdrawal> getAllWithdrawals() {
+//        Iterable<Withdrawal> withdrawals = withdrawalRepository.findAll();
+//        ArrayList<Withdrawal> all_withdrawals = new ArrayList<>();
+//        for(Withdrawal withdrawal : withdrawals) {
+//            all_withdrawals.add(withdrawal);
+//        }
+//        return all_withdrawals;
+//    }
 
 }
