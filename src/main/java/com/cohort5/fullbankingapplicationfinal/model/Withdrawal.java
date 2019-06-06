@@ -3,6 +3,7 @@ package com.cohort5.fullbankingapplicationfinal.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.lang.reflect.Type;
 
 @Entity
 public class Withdrawal {
@@ -13,6 +14,7 @@ public class Withdrawal {
     private enum type{
         p2p, deposit, withdrawal
     }
+    private Type type;
     private String transaction_date;
     private String status;
     private Long payer_id;

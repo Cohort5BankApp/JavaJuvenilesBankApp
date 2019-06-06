@@ -2,6 +2,7 @@ package com.cohort5.fullbankingapplicationfinal.model;
 
 import javafx.animation.Animation;
 import jdk.net.SocketFlow;
+import org.apache.tomcat.jni.Status;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +14,12 @@ public class Bill {
     @Id
     @GeneratedValue
     Long id;
+
     private enum status {
         pending, cancelled, completed, reccuring
     }
-    private Animation.Status status;
+
+    private Status status;
     private String payee;
     private String nickname;
     private String creation_date;
@@ -29,7 +32,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Long id, Animation.Status status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
+    public Bill(Long id, Status status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
         this.id = id;
         this.status = status;
         this.payee = payee;
@@ -50,11 +53,11 @@ public class Bill {
         this.id = id;
     }
 
-    public Animation.Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Animation.Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
