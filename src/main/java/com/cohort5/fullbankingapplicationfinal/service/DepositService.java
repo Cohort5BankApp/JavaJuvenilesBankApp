@@ -21,16 +21,16 @@ public class DepositService {
     }
     public void createDeposit(Long account_id, Deposit deposit){
         depositRepository.save(deposit);
-        deposit.setAccount_Id(account_id);
+        deposit.setPayee_id(account_id);
         Account account = accountRepository.getAccountById(account_id).get();
-        account.setBalance(deposit.getBalance() + deposit.getBalance());
+        account.setBalance(deposit.getAmount() + account.getBalance());
     }
     public Deposit updateDeposit(Long account_Id, Deposit deposit){
         deposit.setAccount_Id(account_Id);
         return depositRepository.save(deposit);
     }
     public void deleteDeposit(Long deposit_id){
-        getDepositById(account_Id);
-        depositRepository.delete(getDepositById(deposit_id));
+        getDepositById(deposit_id);
+        depositRepository.delete(getDepositById(deposit_id).get());
     }
 }

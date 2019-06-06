@@ -17,7 +17,7 @@ public class DepositController {
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
     public Deposit createDeposit(@PathVariable Long account_Id, Deposit deposit){
         depositService.createDeposit(account_Id,deposit);
-        return depositService.getDepositById(deposit.getId());
+        return depositService.getDepositById(deposit.getId()).get();
     }
 
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.GET)
