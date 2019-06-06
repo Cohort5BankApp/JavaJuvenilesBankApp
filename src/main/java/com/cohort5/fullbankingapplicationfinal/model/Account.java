@@ -9,13 +9,13 @@ public class Account {
 
 	public Account (){}
 
-	public Account(Long id, Type type, String nickname, Integer rewards, Double balance, Customer customer) {
+	public Account(Long id, Type type, String nickname, Integer rewards, Double balance, Long customer_id) {
 		this.id = id;
 		this.type = type;
 		this.nickname = nickname;
 		this.rewards = rewards;
 		this.balance = balance;
-		this.customer = customer;
+		this.customer_id = customer_id;
 	}
 
 	@GeneratedValue
@@ -34,7 +34,7 @@ public class Account {
 
 	private Double balance;
 
-	private Customer customer;
+	private Long customer_id;
 
 	public Long getId() {
 		return id;
@@ -44,12 +44,12 @@ public class Account {
 		this.id = id;
 	}
 
-	public Type getAccounttype() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setAccounttype(Type accounttype) {
-		this.type = accounttype;
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	public String getNickname() {
@@ -76,11 +76,12 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Long getCustomer_id() {
+		return customer_id;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomer_id(Long customer_id) {
+		this.customer_id = customer_id;
 	}
 }
+
