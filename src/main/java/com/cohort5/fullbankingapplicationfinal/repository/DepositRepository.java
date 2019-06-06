@@ -1,4 +1,7 @@
 package com.cohort5.fullbankingapplicationfinal.repository;
 
-public interface DepositRepository {
+import com.cohort5.fullbankingapplicationfinal.model.Deposit;
+import org.springframework.data.repository.CrudRepository;
+
+public interface DepositRepository extends CrudRepository<Deposit, Long> {
 }
