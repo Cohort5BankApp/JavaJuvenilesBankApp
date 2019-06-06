@@ -4,9 +4,10 @@ package com.cohort5.fullbankingapplicationfinal.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.lang.reflect.Type;
 
 @Entity
-public class Deposit {
+public class Deposit<Medium> {
 
     @Id
     @GeneratedValue
@@ -16,6 +17,7 @@ public class Deposit {
         p2p, deposit, withdraws
     }
 
+    private Type type;
     private String transaction_date;
     private String status;
     private Long payee_id;
@@ -24,17 +26,20 @@ public class Deposit {
         balance, rewards
     }
 
+    private Medium medium;
     private Double amount;
     private String description;
 
     public Deposit() {
     }
 
-    public Deposit(Long id, String transaction_date, String status, Long payee_id, Double amount, String description) {
+    public Deposit(Long id, Type type, String transaction_date, String status, Long payee_id, Medium medium, Double amount, String description) {
         this.id = id;
+        this.type = type;
         this.transaction_date = transaction_date;
         this.status = status;
         this.payee_id = payee_id;
+        this.medium = medium;
         this.amount = amount;
         this.description = description;
     }
@@ -45,6 +50,14 @@ public class Deposit {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getTransaction_date() {
@@ -71,6 +84,14 @@ public class Deposit {
         this.payee_id = payee_id;
     }
 
+    public Medium getMedium() {
+        return medium;
+    }
+
+    public void setMedium(Medium medium) {
+        this.medium = medium;
+    }
+
     public Double getAmount() {
         return amount;
     }
@@ -91,9 +112,11 @@ public class Deposit {
     public String toString() {
         return "Deposit{" +
                 "id=" + id +
+                ", type=" + type +
                 ", transaction_date='" + transaction_date + '\'' +
                 ", status='" + status + '\'' +
                 ", payee_id=" + payee_id +
+                ", medium=" + medium +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';

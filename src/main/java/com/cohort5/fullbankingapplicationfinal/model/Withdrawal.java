@@ -16,22 +16,24 @@ public class Withdrawal {
     private String transaction_date;
     private String status;
     private Long payer_id;
-    private enum medium{
+    private enum Medium{
         balance, rewards
     }
+    private Medium medium;
     private Double amount;
     private String description;
 
     public Withdrawal() {
     }
 
-    public Withdrawal(Long id, String transaction_date, String status, Long payer_id, Double amount, String description) {
+    public Withdrawal(Long id, String transaction_date, String status, Long payer_id, Double amount, String description, Medium medium) {
         this.id = id;
         this.transaction_date = transaction_date;
         this.status = status;
         this.payer_id = payer_id;
         this.amount = amount;
         this.description = description;
+        this.medium = medium;
     }
 
     public Long getId() {
@@ -82,6 +84,14 @@ public class Withdrawal {
         this.description = description;
     }
 
+    public Medium getMedium() {
+        return medium;
+    }
+
+    public void setMedium(Medium medium) {
+        this.medium = medium;
+    }
+
     @Override
     public String toString() {
         return "Withdrawal{" +
@@ -89,6 +99,7 @@ public class Withdrawal {
                 ", transaction_date='" + transaction_date + '\'' +
                 ", status='" + status + '\'' +
                 ", payer_id=" + payer_id +
+                ", medium=" + medium +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';

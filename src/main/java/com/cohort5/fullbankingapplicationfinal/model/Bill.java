@@ -1,5 +1,8 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
+import javafx.animation.Animation;
+import jdk.net.SocketFlow;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +16,7 @@ public class Bill {
     private enum status {
         pending, cancelled, completed, reccuring
     }
+    private Animation.Status status;
     private String payee;
     private String nickname;
     private String creation_date;
@@ -25,8 +29,9 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Long id, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
+    public Bill(Long id, Animation.Status status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
         this.id = id;
+        this.status = status;
         this.payee = payee;
         this.nickname = nickname;
         this.creation_date = creation_date;
@@ -43,6 +48,14 @@ public class Bill {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Animation.Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Animation.Status status) {
+        this.status = status;
     }
 
     public String getPayee() {
@@ -113,6 +126,7 @@ public class Bill {
     public String toString() {
         return "Bill{" +
                 "id=" + id +
+                ", status=" + status +
                 ", payee='" + payee + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", creation_date='" + creation_date + '\'' +
