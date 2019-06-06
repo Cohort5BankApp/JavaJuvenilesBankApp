@@ -30,7 +30,7 @@ public class DepositController {
         return depositService.getDepositById(deposit_Id).get();
     }
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)
-    public void deleteDeposit(@PathVariable Long deposit_Id){
-        depositService.deleteDeposit(deposit_Id);
+    public void deleteDeposit(@PathVariable Long deposit_Id, Long account_Id){
+        depositService.deleteDeposit(deposit_Id,account_Id);
     }
 }
