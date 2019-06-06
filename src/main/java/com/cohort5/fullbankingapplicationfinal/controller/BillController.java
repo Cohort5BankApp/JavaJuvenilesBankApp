@@ -28,8 +28,8 @@ public class BillController {
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.PUT)
-    public void updateBill(@RequestBody Bill bill, @PathVariable Long bill_Id ,Long account_Id){
-        billService.updateBill(bill,bill_Id,account_Id);
+    public void updateBill(@RequestBody Bill bill, @PathVariable Long account_Id){
+        billService.updateBill(bill,account_Id);
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.DELETE)

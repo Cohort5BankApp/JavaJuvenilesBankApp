@@ -14,14 +14,13 @@ public class BillService {
 
     @Autowired
     BillRepository billRepository;
+    @Autowired
     AccountRepository accountRepository;
 
     public void createBill(Long account_Id,Bill bill) {
         billRepository.save(bill);
       Account account = accountRepository.findById(account_Id).get();
-      bill.setAccount_Id(account_Id);
-     double newBill =  account.getBalance - bill.getPayment_amount;
-
+     double newBill =  account.getBalance() - bill.getPayment_amount();
      bill.setBalance(newBill);
     }
 
@@ -33,10 +32,11 @@ public class BillService {
         return billRepository.findAll();
      }
 
-     public void updateBill(Bill bill, Long bill_id, Long account_Id){
+     public void updateBill(Bill bill, Long account_Id){
         billRepository.findById(bill_id);
         Account account = accountRepository.findById(account_Id).get();
-        bill.setAccount_Id(account_Id);
+        Double newBill = account.getBalance() - bill.getPayment_amount();
+        bill.seBalance(newBill);
      }
 
      public void deleteBill(Long bill_id, Long account_Id){
