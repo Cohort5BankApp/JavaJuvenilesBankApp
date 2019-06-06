@@ -27,13 +27,13 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "/bills/billId", method = RequestMethod.PUT)
-    public void updateBill(@RequestBody Bill bill, @PathVariable Long bill_Id ,@PathVariable Long account_Id){
+    @RequestMapping(value = "/bills/{billId}", method = RequestMethod.PUT)
+    public void updateBill(@RequestBody Bill bill, @PathVariable Long bill_Id ,Long account_Id){
         billService.updateBill(bill,bill_Id,account_Id);
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.DELETE)
-    public void deleteBill(@RequestBody Bill bill,@PathVariable Long account_Id, @PathVariable Long bill_Id ){
+    public void deleteBill(@PathVariable Long account_Id, Long bill_Id ){
         billService.deleteBill(bill_Id,account_Id);
     }
 
