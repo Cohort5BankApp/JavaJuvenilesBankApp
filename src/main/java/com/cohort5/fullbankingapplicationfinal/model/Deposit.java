@@ -1,6 +1,8 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
 
+import org.apache.tomcat.jni.Status;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,7 +21,10 @@ public class Deposit<Medium> {
 
     private Type type;
     private String transaction_date;
-    private String status;
+    private enum status{
+        pending, cancelled, completed, reccuring
+    }
+    private Status status;
     private Long payee_id;
 
     private enum medium {
@@ -33,7 +38,7 @@ public class Deposit<Medium> {
     public Deposit() {
     }
 
-    public Deposit(Long id, Type type, String transaction_date, String status, Long payee_id, Medium medium, Double amount, String description) {
+    public Deposit(Long id, Type type, String transaction_date, Status status, Long payee_id, Medium medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
@@ -68,11 +73,11 @@ public class Deposit<Medium> {
         this.transaction_date = transaction_date;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -114,7 +119,7 @@ public class Deposit<Medium> {
                 "id=" + id +
                 ", type=" + type +
                 ", transaction_date='" + transaction_date + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", payee_id=" + payee_id +
                 ", medium=" + medium +
                 ", amount=" + amount +

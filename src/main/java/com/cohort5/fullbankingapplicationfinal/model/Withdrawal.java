@@ -1,5 +1,7 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
+import org.apache.tomcat.jni.Status;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,7 +18,10 @@ public class Withdrawal {
     }
     private Type type;
     private String transaction_date;
-    private String status;
+    private enum status{
+        pending, cancelled, completed, reccuring
+    }
+    private Status status;
     private Long payer_id;
     private enum Medium{
         balance, rewards
@@ -28,14 +33,15 @@ public class Withdrawal {
     public Withdrawal() {
     }
 
-    public Withdrawal(Long id, String transaction_date, String status, Long payer_id, Double amount, String description, Medium medium) {
+    public Withdrawal(Long id, Type type, String transaction_date, Status status, Long payer_id, Medium medium, Double amount, String description) {
         this.id = id;
+        this.type = type;
         this.transaction_date = transaction_date;
         this.status = status;
         this.payer_id = payer_id;
+        this.medium = medium;
         this.amount = amount;
         this.description = description;
-        this.medium = medium;
     }
 
     public Long getId() {
@@ -46,6 +52,14 @@ public class Withdrawal {
         this.id = id;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public String getTransaction_date() {
         return transaction_date;
     }
@@ -54,11 +68,11 @@ public class Withdrawal {
         this.transaction_date = transaction_date;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -68,6 +82,14 @@ public class Withdrawal {
 
     public void setPayer_id(Long payer_id) {
         this.payer_id = payer_id;
+    }
+
+    public Medium getMedium() {
+        return medium;
+    }
+
+    public void setMedium(Medium medium) {
+        this.medium = medium;
     }
 
     public Double getAmount() {
@@ -86,20 +108,13 @@ public class Withdrawal {
         this.description = description;
     }
 
-    public Medium getMedium() {
-        return medium;
-    }
-
-    public void setMedium(Medium medium) {
-        this.medium = medium;
-    }
-
     @Override
     public String toString() {
         return "Withdrawal{" +
                 "id=" + id +
+                ", type=" + type +
                 ", transaction_date='" + transaction_date + '\'' +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", payer_id=" + payer_id +
                 ", medium=" + medium +
                 ", amount=" + amount +
