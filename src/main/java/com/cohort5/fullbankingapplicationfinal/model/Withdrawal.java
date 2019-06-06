@@ -12,6 +12,7 @@ public class Withdrawal {
     Long id;
     String type;
     String transaction_date;
+    String status;
     Long payer_id;
     String medium;
     Double amount;
@@ -20,10 +21,11 @@ public class Withdrawal {
     public Withdrawal() {
     }
 
-    public Withdrawal(Long id, String type, String transaction_date, Long payer_id, String medium, Double amount, String description) {
+    public Withdrawal(Long id, String type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
+        this.status = status;
         this.payer_id = payer_id;
         this.medium = medium;
         this.amount = amount;
@@ -52,6 +54,14 @@ public class Withdrawal {
 
     public void setTransaction_date(String transaction_date) {
         this.transaction_date = transaction_date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getPayer_id() {
@@ -92,6 +102,7 @@ public class Withdrawal {
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", transaction_date='" + transaction_date + '\'' +
+                ", status='" + status + '\'' +
                 ", payer_id=" + payer_id +
                 ", medium='" + medium + '\'' +
                 ", amount=" + amount +
