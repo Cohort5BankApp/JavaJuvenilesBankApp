@@ -19,51 +19,51 @@ public class AccountController {
     }
 
     //get account owner method
-    @RequestMapping(value = "/customers/{account_id}", method = RequestMethod.GET)
-    public Customer getAccountOwner(@PathVariable Long account_id){
-        return accountService.getAccountOwner(account_id);
+    @RequestMapping(value = "/customers/{accountId}", method = RequestMethod.GET)
+    public Customer getAccountOwner(@PathVariable Long accountId){
+        return accountService.getAccountOwner(accountId);
     }
 
     //get bills by account method
-    @RequestMapping(value = "/accounts/{account_id}/bills", method = RequestMethod.GET)
-    public Iterable<Bill> getBillsByAccount(@PathVariable Long account_id){
-        return accountService.getBillsByAccount(account_id);
+    @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.GET)
+    public Iterable<Bill> getBillsByAccount(@PathVariable Long accountId){
+        return accountService.getBillsByAccount(accountId);
     }
 
     //get withdrawals by account method
-    @RequestMapping(value = "/accounts/{account_id}/withdrawals", method = RequestMethod.GET)
-    public Iterable<Withdrawal> getWithdrawalsByAccount(@PathVariable Long account_id){
-        return accountService.getWithdrawalsByAccount(account_id);
+    @RequestMapping(value = "/accounts/{accountId}/withdrawals", method = RequestMethod.GET)
+    public Iterable<Withdrawal> getWithdrawalsByAccount(@PathVariable Long accountId){
+        return accountService.getWithdrawalsByAccount(accountId);
     }
 
     //get deposits by account method
-    @RequestMapping(value = "/accounts/{account_id}/deposits", method = RequestMethod.GET)
-    public Iterable<Deposit> getDepositsByAccount(@PathVariable Long account_id){
-        return accountService.getDepositsByAccount(account_id);
+    @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.GET)
+    public Iterable<Deposit> getDepositsByAccount(@PathVariable Long accountId){
+        return accountService.getDepositsByAccount(accountId);
     }
 
     //create an account method
-    @RequestMapping(value = "/customers/{customers_id}/accounts", method = RequestMethod.POST)
-    public Account createAccount(@RequestBody Account account, @PathVariable Long customer_id ){
-        return accountService.createAccount(customer_id, account);
+    @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
+    public Account createAccount(@RequestBody Account account, @PathVariable Long customerId ){
+        return accountService.createAccount(customerId, account);
     }
 
     //get account by id method
-    @RequestMapping(value = "/accounts/{account_id}", method = RequestMethod.GET)
-    public Optional<Account> getAccountById(@PathVariable Long account_id){
-        return accountService.getAccountById(account_id);
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
+    public Optional<Account> getAccountById(@PathVariable Long accountId){
+        return accountService.getAccountById(accountId);
     }
 
     //update an account method
-    @RequestMapping(value = "/accounts/{account_id}", method = RequestMethod.PUT)
-    public Account updateAccount(@RequestBody Account account){
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
+    public Account updateAccount(@RequestBody Account account, @PathVariable Long accountId){
         return accountService.updateAccount(account);
     }
 
     //delete an account method
-    @RequestMapping(value = "/accounts/{account_id}", method = RequestMethod.DELETE)
-    public void deleteAccount(@PathVariable Long account_id){
-        accountService.deleteAccount(account_id);
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
+    public void deleteAccount(@PathVariable Long accountId){
+        accountService.deleteAccount(accountId);
     }
 
 }
