@@ -8,16 +8,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class HttpException extends RuntimeException{
 
 	private static final long serialVersionUID = 1l;
+	String message;
+	HttpStatus status;
 
 	public HttpException(){}
 
-	public HttpException(String message){
+
+	public HttpException(String message, HttpStatus status) {
 		super(message);
+		this.status = status;
 	}
-
-	public HttpException(String message, Throwable cause){
-		super(message, cause);
-	}
-
-
 }
