@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(source = "*", allowedHeaders = "*")
 @RestController
 public class BillController {
 

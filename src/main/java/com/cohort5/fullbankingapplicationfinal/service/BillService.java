@@ -6,9 +6,10 @@ import com.cohort5.fullbankingapplicationfinal.repository.AccountRepository;
 import com.cohort5.fullbankingapplicationfinal.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Optional;
-
+@CrossOrigin(source = "*", allowedHeaders = "*")
 @Service
 public class BillService {
 
