@@ -7,20 +7,9 @@ import javax.persistence.Id;
 @Entity
 public class Account {
 
-	public Account (){}
-
-	public Account(Long id, Type type, String nickname, Integer rewards, Double balance, Long customer_id) {
-		this.id = id;
-		this.type = type;
-		this.nickname = nickname;
-		this.rewards = rewards;
-		this.balance = balance;
-		this.customer_id = customer_id;
-	}
-
 	@GeneratedValue
 	@Id
-	private Long id;
+	private Long account_id;
 
 	private Type type;
 
@@ -36,12 +25,24 @@ public class Account {
 
 	private Long customer_id;
 
-	public Long getId() {
-		return id;
+	public Account (){}
+
+	public Account(Long account_id, Type type, String nickname, Integer rewards, Double balance, Long customer_id) {
+		this.account_id = account_id;
+		this.type = type;
+		this.nickname = nickname;
+		this.rewards = rewards;
+		this.balance = balance;
+		this.customer_id = customer_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+
+	public Long getAccount_id() {
+		return account_id;
+	}
+
+	public void setAccount_id(Long account_id) {
+		this.account_id = account_id;
 	}
 
 	public Type getType() {
