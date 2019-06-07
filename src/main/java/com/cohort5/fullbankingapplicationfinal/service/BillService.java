@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Optional;
-@CrossOrigin(source = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Service
 public class BillService {
 
@@ -22,7 +22,7 @@ public class BillService {
         billRepository.save(bill);
       Account account = accountRepository.findById(account_Id).get();
      double newBill =  account.getBalance() - bill.getPayment_amount();
-     bill.setBalance(newBill);
+     account.setBalance(newBill);
     }
 
     public Optional<Bill> getBillById(Long bill_id){
@@ -34,17 +34,17 @@ public class BillService {
      }
 
      public void updateBill(Bill bill, Long account_Id){
-        billRepository.findById(bill_id);
+        billRepository.save(bill);
         Account account = accountRepository.findById(account_Id).get();
         Double newBill = account.getBalance() - bill.getPayment_amount();
-        bill.seBalance(newBill);
+        account.setBalance(newBill);
      }
 
      public void deleteBill(Long bill_id, Long account_Id){
         billRepository.deleteById(bill_id);
         Account account = accountRepository.findById(account_Id).get();
         Bill bill = billRepository.findById(bill_id).get();
-        double returnMoney = account.getBalance + bill.getPayment_amount;
+        double returnMoney = account.getBalance() + bill.getPayment_amount();
         account.setBalance(returnMoney);
      }
 }
