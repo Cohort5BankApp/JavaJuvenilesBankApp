@@ -67,11 +67,11 @@ public class AccountService {
     //if the two are
     public Iterable<Deposit> getDepositsByAccount(Long account_id){
         Account account = accountRepository.findById(account_id).get();
-        Iterable<Deposit> deposit = depositRepository.findAll();
+        Iterable<Deposit> deposits = depositRepository.findAll();
         ArrayList<Deposit> list = new ArrayList<>();
-        for (Deposit deposits : deposit){
+        for (Deposit deposit : deposits){
             if(deposit.getAccount_id() == account_id)
-                list.add(deposits);
+                list.add(deposit);
         }
         return list;
     }
@@ -79,11 +79,11 @@ public class AccountService {
     //get withdrawals by account method
     public Iterable<Withdrawal> getWithdrawalsByAccount (Long account_id) {
         Account account = accountRepository.findById(account_id).get();
-        Iterable<Withdrawal> withdrawal = withdrawalRepository.findAll();
+        Iterable<Withdrawal> withdrawals = withdrawalRepository.findAll();
         ArrayList<Withdrawal> list = new ArrayList<>();
-        for (Withdrawal withdrawals : withdrawal) {
-            if (withdrawal.getaccount_Id() == account_id)
-                list.add(withdrawals);
+        for (Withdrawal withdrawal : withdrawals) {
+            if (withdrawal.getAccount_id() == account_id)
+                list.add(withdrawal);
         }
         return list;
     }
@@ -94,7 +94,7 @@ public class AccountService {
         Iterable<Bill> bill = billRepository.findAll();
         ArrayList<Bill> list = new ArrayList<>();
         for (Bill bills : bill){
-            if(bill.getAccount_id() == account_id)
+            if(bills.getAccount_id() == account_id)
                 list.add(bills);
         }
         return list;
