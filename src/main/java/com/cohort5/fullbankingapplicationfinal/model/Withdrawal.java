@@ -22,7 +22,7 @@ public class Withdrawal {
         pending, cancelled, completed, reccuring
     }
     private Status status;
-    private Long payer_id;
+    private Long account_id;
     private enum Medium{
         balance, rewards
     }
@@ -33,12 +33,12 @@ public class Withdrawal {
     public Withdrawal() {
     }
 
-    public Withdrawal(Long id, Type type, String transaction_date, Status status, Long payer_id, Medium medium, Double amount, String description) {
+    public Withdrawal(Long id, Type type, String transaction_date, Status status, Long account_id, Medium medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
         this.status = status;
-        this.payer_id = payer_id;
+        this.account_id = account_id;
         this.medium = medium;
         this.amount = amount;
         this.description = description;
@@ -76,12 +76,12 @@ public class Withdrawal {
         this.status = status;
     }
 
-    public Long getPayer_id() {
-        return payer_id;
+    public Long getAccount_id() {
+        return account_id;
     }
 
-    public void setPayer_id(Long payer_id) {
-        this.payer_id = payer_id;
+    public void setAccount_id(Long account_id) {
+        this.account_id = account_id;
     }
 
     public Medium getMedium() {
@@ -115,7 +115,7 @@ public class Withdrawal {
                 ", type=" + type +
                 ", transaction_date='" + transaction_date + '\'' +
                 ", status=" + status +
-                ", payer_id=" + payer_id +
+                ", account_id=" + account_id +
                 ", medium=" + medium +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
