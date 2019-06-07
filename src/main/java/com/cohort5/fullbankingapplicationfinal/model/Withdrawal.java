@@ -1,32 +1,44 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
+import org.apache.tomcat.jni.Status;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.lang.reflect.Type;
 
 @Entity
 public class Withdrawal {
 
     @Id
     @GeneratedValue
-    Long id;
-    String type;
-    String transaction_date;
-    String status;
-    Long payer_id;
-    String medium;
-    Double amount;
-    String description;
+    private Long id;
+    private enum type{
+        p2p, deposit, withdrawal
+    }
+    private Type type;
+    private String transaction_date;
+    private enum status{
+        pending, cancelled, completed, reccuring
+    }
+    private Status status;
+    private Long account_id;
+    private enum Medium{
+        balance, rewards
+    }
+    private Medium medium;
+    private Double amount;
+    private String description;
 
     public Withdrawal() {
     }
 
-    public Withdrawal(Long id, String type, String transaction_date, String status, Long payer_id, String medium, Double amount, String description) {
+    public Withdrawal(Long id, Type type, String transaction_date, Status status, Long account_id, Medium medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
         this.status = status;
-        this.payer_id = payer_id;
+        this.account_id = account_id;
         this.medium = medium;
         this.amount = amount;
         this.description = description;
@@ -40,11 +52,11 @@ public class Withdrawal {
         this.id = id;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -56,27 +68,27 @@ public class Withdrawal {
         this.transaction_date = transaction_date;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
-    public Long getPayer_id() {
-        return payer_id;
+    public Long getAccount_id() {
+        return account_id;
     }
 
-    public void setPayer_id(Long payer_id) {
-        this.payer_id = payer_id;
+    public void setAccount_id(Long account_id) {
+        this.account_id = account_id;
     }
 
-    public String getMedium() {
+    public Medium getMedium() {
         return medium;
     }
 
-    public void setMedium(String medium) {
+    public void setMedium(Medium medium) {
         this.medium = medium;
     }
 
@@ -100,11 +112,11 @@ public class Withdrawal {
     public String toString() {
         return "Withdrawal{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", transaction_date='" + transaction_date + '\'' +
-                ", status='" + status + '\'' +
-                ", payer_id=" + payer_id +
-                ", medium='" + medium + '\'' +
+                ", status=" + status +
+                ", account_id=" + account_id +
+                ", medium=" + medium +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
                 '}';

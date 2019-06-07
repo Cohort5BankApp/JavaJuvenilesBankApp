@@ -27,7 +27,7 @@ public class CustomerService {
         Iterable<Account> accounts = accountRepository.findAll();
         ArrayList<Account> customer_accounts = new ArrayList<>();
         for (Account account : accounts) {
-            if (account.getId() == customer_id) {
+            if (account.getCustomer_id() == customer_id) {
                 customer_accounts.add(account);
             }
         }
@@ -46,7 +46,7 @@ public class CustomerService {
             }
             for (Bill bill : bills) {
                 for (Account customer_account : customer_accounts) {
-                    if (bill.getAccount_id() == customer_account.getId()) {
+                    if (bill.getAccount_id() == customer_account.getAccount_id()) {
                         customer_bills.add(bill);
                     }
                 }
