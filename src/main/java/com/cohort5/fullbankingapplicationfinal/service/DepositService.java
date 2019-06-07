@@ -16,14 +16,16 @@ public class DepositService {
     public DepositRepository depositRepository;
     @Autowired
     public AccountRepository accountRepository;
+    @Autowired
+    public AccountService accountService;
 
     public Optional<Deposit> getDepositById(Long deposit_id){
         return depositRepository.findById(deposit_id);
     }
     public void createDeposit(Long account_id, Deposit deposit){
         depositRepository.save(deposit);
-        deposit.setPayee_id(account_id);
-        Account account = accountRepository.getAccountById(account_id).get();
+        deposit.setAccount_id(account_id);
+        Account account = accountService.getAccountById(account_id).get();
         account.setBalance(deposit.getAmount() + account.getBalance());
     }
     public void updateDeposit(Long account_Id, Deposit deposit){
