@@ -1,5 +1,7 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
+import org.apache.tomcat.jni.Status;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,20 +12,25 @@ public class Bill {
     @Id
     @GeneratedValue
     Long id;
-    String status;
-    String payee;
-    String nickname;
-    String creation_date;
-    String payment_date;
-    Integer recurring_date;
-    String upcoming_payment_date;
-    Double payment_amount;
-    String account_id;
+
+    private enum status {
+        pending, cancelled, completed, reccuring
+    }
+
+    private Status status;
+    private String payee;
+    private String nickname;
+    private String creation_date;
+    private String payment_date;
+    private Integer recurring_date;
+    private String upcoming_payment_date;
+    private Double payment_amount;
+    private Long account_id;
 
     public Bill() {
     }
 
-    public Bill(Long id, String status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
+    public Bill(Long id, Status status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, Long account_id) {
         this.id = id;
         this.status = status;
         this.payee = payee;
@@ -44,11 +51,11 @@ public class Bill {
         this.id = id;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -108,11 +115,11 @@ public class Bill {
         this.payment_amount = payment_amount;
     }
 
-    public String getAccount_id() {
+    public Long getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(String account_id) {
+    public void setAccount_id(Long account_id) {
         this.account_id = account_id;
     }
 
@@ -120,7 +127,7 @@ public class Bill {
     public String toString() {
         return "Bill{" +
                 "id=" + id +
-                ", status='" + status + '\'' +
+                ", status=" + status +
                 ", payee='" + payee + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", creation_date='" + creation_date + '\'' +
@@ -128,7 +135,7 @@ public class Bill {
                 ", recurring_date=" + recurring_date +
                 ", upcoming_payment_date='" + upcoming_payment_date + '\'' +
                 ", payment_amount=" + payment_amount +
-                ", account_id='" + account_id + '\'' +
+                ", account_id=" + account_id +
                 '}';
     }
 }

@@ -25,7 +25,7 @@ public class CustomerController {
     @PostMapping(value = "/createCustomer")
     public Customer createCustomer(@RequestBody Customer customer){
         Customer createdCustomer = customerService.createCustomer(customer);
-        Long customer_id = createdCustomer.getId();
+        Long customer_id = createdCustomer.getCustomer_id();
         Optional<Customer> customerCheck = customerService.getCustomerById(customer_id);
         if(!customerCheck.isPresent())
             throw new HttpException(HttpStatus.NOT_FOUND, "error creating customer");
@@ -57,7 +57,7 @@ public class CustomerController {
     @PutMapping(value = "/{id}")
     public Customer updateCustomer(@PathVariable("id") Long customer_id, @RequestBody Customer customer){
         customerService.updateCustomer(customer);
-        Optional<Customer> customerCheck = customerService.getCustomerById(customer.getId());
+        Optional<Customer> customerCheck = customerService.getCustomerById(customer.getCustomer_id());
         if(!customerCheck.isPresent())
             throw new HttpException(HttpStatus.NOT_FOUND, "error updating customer");
         if(customerCheck.isPresent())
