@@ -35,13 +35,13 @@ public class CustomerService {
         return customer_accounts;
     }
 
-    public Iterable<Bill> getBillsByCustomer(Long customer_id) {
+    public ArrayList<Bill> getBillsByCustomer(Long customer_id) {
         Iterable<Bill> bills = billRepository.findAll();
         Iterable<Account> accounts = accountRepository.findAll();
         ArrayList<Bill> customer_bills = new ArrayList<>();
         ArrayList<Account> customer_accounts = new ArrayList<>();
         for (Account account : accounts) {
-            if (account.getCustomer().getCustomer_id() == customer_id) {
+            if (account.getCustomer_id() == customer_id) {
                 customer_accounts.add(account);
             }
             for (Bill bill : bills) {
@@ -69,13 +69,14 @@ public class CustomerService {
         return customerRepository.findById(customer_id);
     }
 
-    public void createCustomer(Customer customer){
+    public Customer createCustomer(Customer customer){
         customerRepository.save(customer);
+        return customer;
 
     }
 
-    public void updateCustomer(Customer customer){
-        customerRepository.save(customer);
+    public Customer updateCustomer(Customer customer){
+        return customerRepository.save(customer);
     }
 
 
