@@ -70,7 +70,7 @@ public class AccountService {
         Iterable<Deposit> deposit = depositRepository.findAll();
         ArrayList<Deposit> list = new ArrayList<>();
         for (Deposit deposits : deposit){
-            if(deposit.getAccount_Id() == account_id)
+            if(deposit.getAccount_id() == account_id)
                 list.add(deposits);
         }
         return list;
@@ -82,7 +82,7 @@ public class AccountService {
         Iterable<Withdrawal> withdrawal = withdrawalRepository.findAll();
         ArrayList<Withdrawal> list = new ArrayList<>();
         for (Withdrawal withdrawals : withdrawal) {
-            if (withdrawal.getAccount_Id() == account_id)
+            if (withdrawal.getaccount_Id() == account_id)
                 list.add(withdrawals);
         }
         return list;
@@ -94,7 +94,7 @@ public class AccountService {
         Iterable<Bill> bill = billRepository.findAll();
         ArrayList<Bill> list = new ArrayList<>();
         for (Bill bills : bill){
-            if(bill.getAccount_Id() == account_id)
+            if(bill.getAccount_id() == account_id)
                 list.add(bills);
         }
         return list;
