@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.lang.reflect.Type;
 
 @Entity
-public class Deposit<Medium> {
+public class Deposit{
 
     @Id
     @GeneratedValue
@@ -25,9 +25,9 @@ public class Deposit<Medium> {
         pending, cancelled, completed, reccuring
     }
     private Status status;
-    private Long payee_id;
+    private Long account_id;
 
-    private enum medium {
+    private enum Medium {
         balance, rewards
     }
 
@@ -38,12 +38,12 @@ public class Deposit<Medium> {
     public Deposit() {
     }
 
-    public Deposit(Long id, Type type, String transaction_date, Status status, Long payee_id, Medium medium, Double amount, String description) {
+    public Deposit(Long id, Type type, String transaction_date, Status status, Long account_id, Medium medium, Double amount, String description) {
         this.id = id;
         this.type = type;
         this.transaction_date = transaction_date;
         this.status = status;
-        this.payee_id = payee_id;
+        this.account_id = account_id;
         this.medium = medium;
         this.amount = amount;
         this.description = description;
@@ -81,12 +81,12 @@ public class Deposit<Medium> {
         this.status = status;
     }
 
-    public Long getPayee_id() {
-        return payee_id;
+    public Long getAccount_id() {
+        return account_id;
     }
 
-    public void setPayee_id(Long payee_id) {
-        this.payee_id = payee_id;
+    public void setAccount_id(Long account_id) {
+        this.account_id = account_id;
     }
 
     public Medium getMedium() {
@@ -120,7 +120,7 @@ public class Deposit<Medium> {
                 ", type=" + type +
                 ", transaction_date='" + transaction_date + '\'' +
                 ", status=" + status +
-                ", payee_id=" + payee_id +
+                ", account_id=" + account_id +
                 ", medium=" + medium +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
