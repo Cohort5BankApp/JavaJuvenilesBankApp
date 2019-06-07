@@ -8,29 +8,30 @@ import java.util.Set;
 @Entity
 public class Customer {
 
-	public Customer(){}
-
-	public Customer(Long id, String first_name, String last_name, Set<Address> addresses) {
-		this.id = id;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.addresses = addresses;
-	}
-
 	@GeneratedValue
 	@Id
-	Long id;
+	Long customer_id;
 
 	String first_name;
 	String last_name;
 	Set<Address> addresses;
 
-	public Long getId() {
-		return id;
+	public Customer() {
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Customer(Long customer_id, String first_name, String last_name, Set<Address> addresses) {
+		this.customer_id = customer_id;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.addresses = addresses;
+	}
+
+	public Long getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(Long customer_id) {
+		this.customer_id = customer_id;
 	}
 
 	public String getFirst_name() {

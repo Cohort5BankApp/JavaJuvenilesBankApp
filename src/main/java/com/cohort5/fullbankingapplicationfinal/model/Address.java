@@ -7,21 +7,10 @@ import javax.persistence.Id;
 @Entity
 public class Address {
 
-	public Address() {
-	}
-
-	public Address(Long id, String street_number, String street_name, String city, String state, String zip) {
-		this.id = id;
-		this.street_number = street_number;
-		this.street_name = street_name;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-	}
 
 	@GeneratedValue
 	@Id
-	private Long id;
+	private Long address_id;
 
 	private String street_number;
 	private String street_name;
@@ -29,12 +18,23 @@ public class Address {
 	private String state;
 	private String zip;
 
-	public Long getId() {
-		return id;
+	public Address(){}
+
+	public Address(Long address_id, String street_number, String street_name, String city, String state, String zip) {
+		this.address_id = address_id;
+		this.street_number = street_number;
+		this.street_name = street_name;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Long getAddress_id() {
+		return address_id;
+	}
+
+	public void setAddress_id(Long address_id) {
+		this.address_id = address_id;
 	}
 
 	public String getStreet_number() {
