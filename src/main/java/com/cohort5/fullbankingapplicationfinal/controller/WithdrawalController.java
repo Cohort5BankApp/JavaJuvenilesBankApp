@@ -57,9 +57,9 @@ public class WithdrawalController {
         withdrawalService.deleteWithdrawal(account_id, withdrawal_id);
         Optional optional = withdrawalService.getWithdrawalById(withdrawal.getId());
         if(!optional.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "Withdrawal does not exist");
-        if(optional.isPresent())
-            throw new HttpException(HttpStatus.NO_CONTENT, "Success");
+            throw new HttpException(HttpStatus.OK, "Success");
+        if(!optional.isPresent())
+            throw new HttpException(HttpStatus.BAD_REQUEST, "No withdrawal with ID");
         return optional;
     }
 
