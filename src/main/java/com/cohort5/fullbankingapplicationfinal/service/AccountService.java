@@ -23,8 +23,13 @@ public class AccountService {
     private BillRepository billRepository;
 
     //get all account method
-    public Iterable<Account> getAllAccounts(){
-        return accountRepository.findAll();
+    public ArrayList<Account> getAllAccounts(){
+        Iterable<Account> accounts = accountRepository.findAll();
+        ArrayList<Account> accounts1 = new ArrayList<>();
+        for (Account account : accounts){
+            accounts1.add(account);
+        }
+        return accounts1;
     }
 
     //get account by id method
@@ -65,38 +70,62 @@ public class AccountService {
     //find all of the deposits and store it into a variable
     //take the deposits grabbed and the account_id grabbed and compare the two
     //if the two are
-    public Iterable<Deposit> getDepositsByAccount(Long account_id){
-        Account account = accountRepository.findById(account_id).get();
+     public ArrayList<Deposit> getDepositsByAccount(Long account_id){
         Iterable<Deposit> deposits = depositRepository.findAll();
+        Iterable<Account> accounts = accountRepository.findAll();
         ArrayList<Deposit> list = new ArrayList<>();
+        ArrayList<Account> accounts1 = new ArrayList<>();
+        for(Account account : accounts){
+            if (account.getAccount_id() == account_id){
+                accounts1.add(account);
+            }
         for (Deposit deposit : deposits){
-            if(deposit.getAccount_id() == account_id)
+            for(Account accounts1s : accounts1){
+                if(deposit.getAccount_id() == accounts1s.getAccount_id()){
                 list.add(deposit);
+                }
+            }
         }
-        return list;
+    } return list;
     }
 
     //get withdrawals by account method
-    public Iterable<Withdrawal> getWithdrawalsByAccount (Long account_id) {
-        Account account = accountRepository.findById(account_id).get();
+    public ArrayList<Withdrawal> getWithdrawalsByAccount(Long account_id){
         Iterable<Withdrawal> withdrawals = withdrawalRepository.findAll();
+        Iterable<Account> accounts = accountRepository.findAll();
         ArrayList<Withdrawal> list = new ArrayList<>();
-        for (Withdrawal withdrawal : withdrawals) {
-            if (withdrawal.getAccount_id() == account_id)
-                list.add(withdrawal);
-        }
-        return list;
+        ArrayList<Account> accounts1 = new ArrayList<>();
+        for(Account account : accounts){
+            if (account.getAccount_id() == account_id){
+                accounts1.add(account);
+            }
+            for (Withdrawal withdrawal : withdrawals){
+                for(Account accounts1s : accounts1){
+                    if(withdrawal.getAccount_id() == accounts1s.getAccount_id()){
+                        list.add(withdrawal);
+                    }
+                }
+            }
+        } return list;
     }
 
     //get bills by account method
-    public Iterable<Bill> getBillsByAccount (Long account_id){
-        Account account = accountRepository.findById(account_id).get();
-        Iterable<Bill> bill = billRepository.findAll();
+    public ArrayList<Bill> getBillsByAccount(Long account_id){
+        Iterable<Bill> bills = billRepository.findAll();
+        Iterable<Account> accounts = accountRepository.findAll();
         ArrayList<Bill> list = new ArrayList<>();
-        for (Bill bills : bill){
-            if(bills.getAccount_id() == account_id)
-                list.add(bills);
-        }
-        return list;
+        ArrayList<Account> accounts1 = new ArrayList<>();
+        for(Account account : accounts){
+            if (account.getAccount_id() == account_id){
+                accounts1.add(account);
+            }
+            for (Bill bill : bills){
+                for(Account accounts1s : accounts1){
+                    if(bill.getAccount_id() == accounts1s.getAccount_id()){
+                        list.add(bill);
+                    }
+                }
+            }
+        } return list;
     }
 }
