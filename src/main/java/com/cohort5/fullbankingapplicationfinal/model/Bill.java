@@ -1,6 +1,5 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
-import org.apache.tomcat.jni.Status;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +12,7 @@ public class Bill {
     @GeneratedValue
     Long id;
 
-    private enum status {
+    private enum Status {
         pending, cancelled, completed, reccuring
     }
 

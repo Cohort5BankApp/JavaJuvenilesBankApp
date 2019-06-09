@@ -49,7 +49,7 @@ public class CustomerController {
     public Optional<Customer> getCustomerById(@PathVariable("id") Long customer_id){
         Optional<Customer> customer = customerService.getCustomerById(customer_id);
         if(!customer.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching customer");
+            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching customer id: " + customer_id);
         if(customer.isPresent())
             throw new HttpException(HttpStatus.OK, "success");
         return customer;
@@ -58,11 +58,11 @@ public class CustomerController {
     @PutMapping(value = "/{id}")
     public Customer updateCustomer(@PathVariable("id") Long customer_id, @RequestBody Customer customer){
         customerService.updateCustomer(customer);
-        Optional<Customer> customerCheck = customerService.getCustomerById(customer.getCustomer_id());
-        if(!customerCheck.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "error updating customer");
-        if(customerCheck.isPresent())
-            throw new HttpException(HttpStatus.OK, "success");
+        Customer customerCheck = customerService.getCustomerById(customer.getCustomer_id()).get();
+        if(customerCheck.toString() != customer.toString())
+            throw new HttpException(HttpStatus.NOT_FOUND, "error updating customer id: " + customer_id);
+        if(customer.toString() == customer.toString())
+            throw new HttpException(HttpStatus.OK, "success updating customer id: " + customer_id);
 
         return customer;
     }
@@ -71,7 +71,7 @@ public class CustomerController {
     public Iterable<Bill> getBillsByCustomer(@PathVariable("id") Long customer_id){
         ArrayList<Bill> customer_bills = customerService.getBillsByCustomer(customer_id);
         if(customer_bills.size() < 1)
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bills");
+            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bills for customer id: " + customer_id);
         if(customer_bills.size() > 0)
             throw new HttpException(HttpStatus.OK, "success");
         return customer_bills;
@@ -81,7 +81,7 @@ public class CustomerController {
     public Iterable<Account> getAccountsByCustomer(@PathVariable("id") Long customer_id){
         ArrayList<Account> customer_accounts = customerService.getAccountsByCustomer(customer_id);
         if(customer_accounts.size() < 1)
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching accounts");
+            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching accounts for customer id: " + customer_id);
         if(customer_accounts.size()> 0)
             throw new HttpException(HttpStatus.OK, "success");
 
