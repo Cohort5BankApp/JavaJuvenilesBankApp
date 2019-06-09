@@ -11,14 +11,14 @@ public class Customer {
 
 	@GeneratedValue
 	@Id
-	Long customer_id;
+	private Long customer_id;
 
-	String first_name;
+	private String first_name;
 
-	String last_name;
+	private String last_name;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	List<Address> addresses;
+	private List<Address> addresses;
 
 	public Customer() {
 	}
