@@ -1,11 +1,9 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
-import org.apache.tomcat.jni.Status;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.lang.reflect.Type;
+
 
 @Entity
 public class Withdrawal {
