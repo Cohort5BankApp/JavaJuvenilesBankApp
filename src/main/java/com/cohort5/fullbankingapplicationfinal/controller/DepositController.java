@@ -13,12 +13,13 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/deposits")
 public class DepositController {
     @Autowired
-    public DepositService depositService;
+    DepositService depositService;
 
-    @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
-    public Deposit createDeposit(@PathVariable Long account_Id, Deposit deposit){
+    @RequestMapping(value = "/createDeposit", method = RequestMethod.POST)
+    public Deposit createDeposit(@PathVariable Long account_Id, @RequestBody Deposit deposit){
         depositService.createDeposit(account_Id,deposit);
         Optional<Deposit> depost1 = depositService.getDepositById(deposit.getId());
         if(!depost1.isPresent())
@@ -29,7 +30,7 @@ public class DepositController {
 
     }
 
-    @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{depositId}", method = RequestMethod.GET)
     public Optional<Deposit> getDepositById(@PathVariable Long deposit_Id){
         Optional<Deposit> deposit1 =depositService.getDepositById(deposit_Id);
         if(!deposit1.isPresent())
@@ -38,19 +39,23 @@ public class DepositController {
             throw new HttpException(HttpStatus.OK, "Success");
         return deposit1;
     }
-    @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.PUT)
-    public Optional<Deposit> updateDeposit(@PathVariable Long deposit_Id, @RequestBody Deposit deposit){
+    @RequestMapping(value = "/{depositId}", method = RequestMethod.PUT)
+    public Deposit updateDeposit(@PathVariable Long deposit_Id, @RequestBody Deposit deposit){
         depositService.updateDeposit(deposit_Id,deposit);
-        Optional<Deposit> deposit1 = depositService.getDepositById(deposit_Id);
-        if (!deposit1.isPresent())
+        Deposit deposit1 = depositService.getDepositById(deposit_Id).get();
+        if (deposit.toString() != deposit1.toString())
             throw new HttpException(HttpStatus.NOT_FOUND, "Error getting id");
-        if (deposit1.isPresent())
+        if (deposit.toString() == deposit1.toString())
             throw new HttpException(HttpStatus.OK, "Updated id: "+ deposit_Id);
         return deposit1;
     }
-    @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)
-    public void deleteDeposit(@PathVariable Long deposit_Id, Long account_Id){
-        depositService.deleteDeposit(deposit_Id,account_Id);
+    @RequestMapping(value = "/{depositId}", method = RequestMethod.DELETE)
+    public void deleteDeposit(@PathVariable Long deposit_Id){
+        /*TODO: editing to extract correct account number from deposit */
+        Deposit depositCheck = depositService.getDepositById(deposit_Id).get();
+        Long account_id = depositCheck.getAccount_id();
+        /* End of edit */
+        depositService.deleteDeposit(deposit_Id,account_id);
         Optional<Deposit> deposit = depositService.getDepositById(deposit_Id);
         if (!deposit.isPresent())
             throw new HttpException(HttpStatus.OK, "Deleted id: " + deposit_Id);
