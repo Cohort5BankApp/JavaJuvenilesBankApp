@@ -12,9 +12,9 @@ public class Customer {
 	@Id
 	Long customer_id;
 
-	String first_name;
-	String last_name;
-	Set<Address> addresses;
+	private String first_name;
+	private String last_name;
+	private Set<Address> addresses;
 
 	public Customer() {
 	}

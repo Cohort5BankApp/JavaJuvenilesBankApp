@@ -13,7 +13,7 @@ public class Bill {
     @GeneratedValue
     Long id;
 
-    private enum status {
+    private enum Status {
         pending, cancelled, completed, reccuring
     }
 

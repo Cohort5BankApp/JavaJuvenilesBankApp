@@ -15,13 +15,13 @@ public class Deposit{
     @GeneratedValue
     private Long id;
 
-    private enum type {
+    private enum Type {
         p2p, deposit, withdraws
     }
 
     private Type type;
     private String transaction_date;
-    private enum status{
+    private enum Status{
         pending, cancelled, completed, reccuring
     }
     private Status status;
