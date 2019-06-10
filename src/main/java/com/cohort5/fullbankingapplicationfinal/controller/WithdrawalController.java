@@ -21,10 +21,10 @@ public class WithdrawalController {
     @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.GET)
     public Optional<Withdrawal> getWithdrawalById(@PathVariable Long id) {
         Optional optional = withdrawalService.getWithdrawalById(id);
-        if(!optional.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "Error fetching withdrawal");
-        if(optional.isPresent())
-            throw new HttpException(HttpStatus.OK, "Success");
+//        if(!optional.isPresent())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "Error fetching withdrawal");
+//        if(optional.isPresent())
+//            throw new HttpException(HttpStatus.OK, "Success");
         return optional;
     }
 
@@ -33,10 +33,10 @@ public class WithdrawalController {
     public Optional<Withdrawal> createWithdrawal(@RequestBody Long account_id, @RequestBody Withdrawal withdrawal) {
         withdrawalService.createWithdrawal(account_id,withdrawal);
         Optional<Withdrawal> optional = withdrawalService.getWithdrawalById(withdrawal.getId());
-        if(!optional.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "Error creating withdrawal");
-        if(optional.isPresent())
-            throw new HttpException(HttpStatus.CREATED, "Success");
+//        if(!optional.isPresent())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "Error creating withdrawal");
+//        if(optional.isPresent())
+//            throw new HttpException(HttpStatus.CREATED, "Success");
         return optional;
     }
 
@@ -47,10 +47,10 @@ public class WithdrawalController {
         /* End of edit */
         withdrawalService.updateWithdrawal(account_id, withdrawal);
         Withdrawal optional = withdrawalService.getWithdrawalById(withdrawal.getId()).get();
-        if(optional.toString() != withdrawal.toString())
-            throw new HttpException(HttpStatus.NOT_FOUND, "unable to update withdrawal");
-        if(optional.toString() == withdrawal.toString())
-            throw new HttpException(HttpStatus.OK, "Success");
+//        if(optional.toString() != withdrawal.toString())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "unable to update withdrawal");
+//        if(optional.toString() == withdrawal.toString())
+//            throw new HttpException(HttpStatus.OK, "Success");
         return optional;
     }
 
@@ -63,10 +63,10 @@ public class WithdrawalController {
         Long account_id = withdrawalCheck.getAccount_id();
         /*End of edit */
         withdrawalService.deleteWithdrawal(account_id, withdrawal_id);
-        if(!optional.isPresent())
-            throw new HttpException(HttpStatus.OK, "Success");
-        if(optional.isPresent())
-            throw new HttpException(HttpStatus.BAD_REQUEST, "error deleting withdrawal");
+//        if(!optional.isPresent())
+//            throw new HttpException(HttpStatus.OK, "Success");
+//        if(optional.isPresent())
+//            throw new HttpException(HttpStatus.BAD_REQUEST, "error deleting withdrawal");
     }
 
 }

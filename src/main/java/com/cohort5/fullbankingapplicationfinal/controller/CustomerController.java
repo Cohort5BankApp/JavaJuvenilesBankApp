@@ -8,13 +8,13 @@ import com.cohort5.fullbankingapplicationfinal.service.BillService;
 import com.cohort5.fullbankingapplicationfinal.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/customers")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerController {
 
@@ -23,69 +23,52 @@ public class CustomerController {
     @Autowired
     private BillService billService;
 
-    @PostMapping(value = "/createCustomer")
-    public Customer createCustomer(@RequestBody Customer customer){
+    @PostMapping(value = "/customers")
+    public Optional<Customer> createCustomer(@RequestBody Customer customer) {
         Customer createdCustomer = customerService.createCustomer(customer);
         Long customer_id = createdCustomer.getCustomer_id();
         Optional<Customer> customerCheck = customerService.getCustomerById(customer_id);
-        if(!customerCheck.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "error creating customer");
-        if(customerCheck.isPresent())
-            throw new HttpException(HttpStatus.CREATED, "success");
-        return createdCustomer;
+        return customerCheck;
     }
 
-    @GetMapping(value = "/all")
-    public Iterable<Customer> getAllCustomers(){
+    @GetMapping(value = "/customers")
+    public ResponseEntity getAllCustomers() {
         ArrayList<Customer> customers = customerService.getAllCustomers();
-        if(customers.size() < 1)
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching customers");
-        if(customers.size() > 0)
-            throw new HttpException(HttpStatus.OK, "success");
-        return customerService.getAllCustomers();
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(customers);
     }
 
-    @GetMapping(value = "/{id}")
-    public Optional<Customer> getCustomerById(@PathVariable("id") Long customer_id){
-        Optional<Customer> customer = customerService.getCustomerById(customer_id);
-        if(!customer.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching customer id: " + customer_id);
-        if(customer.isPresent())
-            throw new HttpException(HttpStatus.OK, "success");
-        return customer;
+    @GetMapping(value = "/customers/{id}")
+    public ResponseEntity getCustomerById(@PathVariable("id") Long customer_id){
+        Customer customer = customerService.getCustomerById(customer_id).get();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(customer);
     }
 
-    @PutMapping(value = "/{id}")
-    public Customer updateCustomer(@PathVariable("id") Long customer_id, @RequestBody Customer customer){
+    @PutMapping(value = "/customers/{id}")
+    public ResponseEntity updateCustomer(@PathVariable("id") Long customer_id, @RequestBody Customer customer){
         customerService.updateCustomer(customer);
         Customer customerCheck = customerService.getCustomerById(customer.getCustomer_id()).get();
-        if(customerCheck.toString() != customer.toString())
-            throw new HttpException(HttpStatus.NOT_FOUND, "error updating customer id: " + customer_id);
-        if(customer.toString() == customer.toString())
-            throw new HttpException(HttpStatus.OK, "success updating customer id: " + customer_id);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(customerCheck);
 
-        return customer;
     }
 
-    @GetMapping(value = "/{id}/bills")
-    public Iterable<Bill> getBillsByCustomer(@PathVariable("id") Long customer_id){
+    @GetMapping(value = "/customers/{id}/bills")
+    public ResponseEntity getBillsByCustomer(@PathVariable("id") Long customer_id){
         ArrayList<Bill> customer_bills = customerService.getBillsByCustomer(customer_id);
-        if(customer_bills.size() < 1)
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bills for customer id: " + customer_id);
-        if(customer_bills.size() > 0)
-            throw new HttpException(HttpStatus.OK, "success");
-        return customer_bills;
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(customer_bills);
+
     }
 
-    @GetMapping(value = "/{id}/accounts")
-    public Iterable<Account> getAccountsByCustomer(@PathVariable("id") Long customer_id){
+    @GetMapping(value = "customers/{id}/accounts")
+    public ResponseEntity getAccountsByCustomer(@PathVariable("id") Long customer_id){
         ArrayList<Account> customer_accounts = customerService.getAccountsByCustomer(customer_id);
-        if(customer_accounts.size() < 1)
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching accounts for customer id: " + customer_id);
-        if(customer_accounts.size()> 0)
-            throw new HttpException(HttpStatus.OK, "success");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(customer_accounts);
 
-        return customer_accounts;
     }
 
 

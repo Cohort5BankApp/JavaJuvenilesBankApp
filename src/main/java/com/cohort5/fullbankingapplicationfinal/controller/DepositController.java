@@ -32,20 +32,20 @@ public class DepositController {
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.GET)
     public Optional<Deposit> getDepositById(@PathVariable Long deposit_Id){
         Optional<Deposit> deposit1 =depositService.getDepositById(deposit_Id);
-        if(!deposit1.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "Error getting id");
-        if(deposit1.isPresent())
-            throw new HttpException(HttpStatus.OK, "Success");
+//        if(!deposit1.isPresent())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "Error getting id");
+//        if(deposit1.isPresent())
+//            throw new HttpException(HttpStatus.OK, "Success");
         return deposit1;
     }
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.PUT)
     public Deposit updateDeposit(@PathVariable Long deposit_Id, @RequestBody Deposit deposit){
         depositService.updateDeposit(deposit_Id,deposit);
         Deposit deposit1 = depositService.getDepositById(deposit_Id).get();
-        if (deposit.toString() != deposit1.toString())
-            throw new HttpException(HttpStatus.NOT_FOUND, "Error getting id");
-        if (deposit.toString() == deposit1.toString())
-            throw new HttpException(HttpStatus.OK, "Updated id: "+ deposit_Id);
+//        if (deposit.toString() != deposit1.toString())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "Error getting id");
+//        if (deposit.toString() == deposit1.toString())
+//            throw new HttpException(HttpStatus.OK, "Updated id: "+ deposit_Id);
         return deposit1;
     }
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.DELETE)
@@ -55,10 +55,10 @@ public class DepositController {
         Long account_id = depositCheck.getAccount_id();
         /* End of edit */
         depositService.deleteDeposit(deposit_Id,account_id);
-        Optional<Deposit> deposit = depositService.getDepositById(deposit_Id);
-        if (!deposit.isPresent())
-            throw new HttpException(HttpStatus.OK, "Deleted id: " + deposit_Id);
-        if(deposit.isPresent())
-            throw new HttpException(HttpStatus.BAD_REQUEST, "Error deleting id: " +deposit_Id);
+//        Optional<Deposit> deposit = depositService.getDepositById(deposit_Id);
+//        if (!deposit.isPresent())
+//            throw new HttpException(HttpStatus.OK, "Deleted id: " + deposit_Id);
+//        if(deposit.isPresent())
+//            throw new HttpException(HttpStatus.BAD_REQUEST, "Error deleting id: " +deposit_Id);
     }
 }
