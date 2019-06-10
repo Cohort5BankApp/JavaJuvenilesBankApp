@@ -12,51 +12,50 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/withdrawals")
 public class WithdrawalController {
 
     @Autowired
     private WithdrawalService withdrawalService;
 
 
-    @RequestMapping(path = "/{withdrawalId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.GET)
     public Optional<Withdrawal> getWithdrawalById(@PathVariable Long id) {
         Optional optional = withdrawalService.getWithdrawalById(id);
-        if(!optional.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "Error fetching withdrawal");
-        if(optional.isPresent())
-            throw new HttpException(HttpStatus.OK, "Success");
+//        if(!optional.isPresent())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "Error fetching withdrawal");
+//        if(optional.isPresent())
+//            throw new HttpException(HttpStatus.OK, "Success");
         return optional;
     }
 
     /* TODO: adding RequestMethod.POST to RequestMethod */
-    @RequestMapping(path = "/createWithdrawal", method= RequestMethod.POST)
+    @RequestMapping(path = "/accounts/{accountId}/withdrawals", method = RequestMethod.POST)
     public Optional<Withdrawal> createWithdrawal(@RequestBody Long account_id, @RequestBody Withdrawal withdrawal) {
         withdrawalService.createWithdrawal(account_id,withdrawal);
         Optional<Withdrawal> optional = withdrawalService.getWithdrawalById(withdrawal.getId());
-        if(!optional.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "Error creating withdrawal");
-        if(optional.isPresent())
-            throw new HttpException(HttpStatus.CREATED, "Success");
+//        if(!optional.isPresent())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "Error creating withdrawal");
+//        if(optional.isPresent())
+//            throw new HttpException(HttpStatus.CREATED, "Success");
         return optional;
     }
 
-    @RequestMapping(path = "/{withdrawalId}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.PUT)
     public Withdrawal updateWithdrawal(@RequestBody Withdrawal withdrawal) {
         /* TODO: adding line 47 to pull the account id from the withdrawal */
         Long account_id = withdrawal.getAccount_id();
         /* End of edit */
         withdrawalService.updateWithdrawal(account_id, withdrawal);
         Withdrawal optional = withdrawalService.getWithdrawalById(withdrawal.getId()).get();
-        if(optional.toString() != withdrawal.toString())
-            throw new HttpException(HttpStatus.NOT_FOUND, "unable to update withdrawal");
-        if(optional.toString() == withdrawal.toString())
-            throw new HttpException(HttpStatus.OK, "Success");
+//        if(optional.toString() != withdrawal.toString())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "unable to update withdrawal");
+//        if(optional.toString() == withdrawal.toString())
+//            throw new HttpException(HttpStatus.OK, "Success");
         return optional;
     }
 
     /*TODO: change RequestMethod from .get to .delete */
-    @RequestMapping(path = "/{withdrawalId}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.DELETE)
     public void deleteWithdrawal(@PathVariable Long withdrawal_id) {
         /*TODO: editing method to pull correct account_id */
         Withdrawal withdrawalCheck = withdrawalService.getWithdrawalById(withdrawal_id).get();
@@ -64,10 +63,10 @@ public class WithdrawalController {
         Long account_id = withdrawalCheck.getAccount_id();
         /*End of edit */
         withdrawalService.deleteWithdrawal(account_id, withdrawal_id);
-        if(!optional.isPresent())
-            throw new HttpException(HttpStatus.OK, "Success");
-        if(optional.isPresent())
-            throw new HttpException(HttpStatus.BAD_REQUEST, "error deleting withdrawal");
+//        if(!optional.isPresent())
+//            throw new HttpException(HttpStatus.OK, "Success");
+//        if(optional.isPresent())
+//            throw new HttpException(HttpStatus.BAD_REQUEST, "error deleting withdrawal");
     }
 
 }
