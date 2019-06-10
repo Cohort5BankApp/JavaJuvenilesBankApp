@@ -24,7 +24,7 @@ public class BillController {
        if(!optionalBill.isPresent())
            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bill");
        if(optionalBill.isPresent())
-           throw new HttpException(HttpStatus.OK, "Suscessful");
+           throw new HttpException(HttpStatus.OK, "Successful");
 
         return billService.getBillById(bill_id);
 
@@ -36,7 +36,7 @@ public class BillController {
          if (bill == null)
              throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bill");
          if (bill != null)
-             throw new HttpException(HttpStatus.OK, "Succesful");
+             throw new HttpException(HttpStatus.OK, "Successful");
 
     }
 
@@ -46,7 +46,7 @@ public class BillController {
         if(!optionalBill.isPresent())
             throw new HttpException(HttpStatus.NOT_FOUND, "error updating bill");
         if(optionalBill.isPresent())
-            throw new HttpException(HttpStatus.OK , "Suscessful");
+            throw new HttpException(HttpStatus.OK , "Successful");
 
         billService.updateBill(bill,account_Id);
 
