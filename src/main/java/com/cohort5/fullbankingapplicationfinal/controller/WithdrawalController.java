@@ -12,14 +12,13 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RequestMapping("/withdrawals")
 public class WithdrawalController {
 
     @Autowired
     private WithdrawalService withdrawalService;
 
 
-    @RequestMapping(path = "/{withdrawalId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.GET)
     public Optional<Withdrawal> getWithdrawalById(@PathVariable Long id) {
         Optional optional = withdrawalService.getWithdrawalById(id);
 //        if(!optional.isPresent())
@@ -30,7 +29,7 @@ public class WithdrawalController {
     }
 
     /* TODO: adding RequestMethod.POST to RequestMethod */
-    @RequestMapping(path = "/createWithdrawal", method= RequestMethod.POST)
+    @RequestMapping(path = "/accounts/{accountId}/withdrawals", method = RequestMethod.POST)
     public Optional<Withdrawal> createWithdrawal(@RequestBody Long account_id, @RequestBody Withdrawal withdrawal) {
         withdrawalService.createWithdrawal(account_id,withdrawal);
         Optional<Withdrawal> optional = withdrawalService.getWithdrawalById(withdrawal.getId());
@@ -41,7 +40,7 @@ public class WithdrawalController {
         return optional;
     }
 
-    @RequestMapping(path = "/{withdrawalId}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.PUT)
     public Withdrawal updateWithdrawal(@RequestBody Withdrawal withdrawal) {
         /* TODO: adding line 47 to pull the account id from the withdrawal */
         Long account_id = withdrawal.getAccount_id();
@@ -56,7 +55,7 @@ public class WithdrawalController {
     }
 
     /*TODO: change RequestMethod from .get to .delete */
-    @RequestMapping(path = "/{withdrawalId}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.DELETE)
     public void deleteWithdrawal(@PathVariable Long withdrawal_id) {
         /*TODO: editing method to pull correct account_id */
         Withdrawal withdrawalCheck = withdrawalService.getWithdrawalById(withdrawal_id).get();
