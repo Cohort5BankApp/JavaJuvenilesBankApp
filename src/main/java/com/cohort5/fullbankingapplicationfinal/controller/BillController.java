@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -21,11 +21,6 @@ public class BillController {
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.GET)
     public Optional<Bill> getBill (@PathVariable Long bill_id){
        Optional<Bill> optionalBill = billService.getBillById(bill_id);
-//
-//       if(!optionalBill.isPresent())
-//           throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bill");
-//       if(optionalBill.isPresent())
-//           throw new HttpException(HttpStatus.OK, "Successful");
 
         return billService.getBillById(bill_id);
 
@@ -35,14 +30,6 @@ public class BillController {
     public void createBill(@RequestBody Bill bill, @PathVariable Long account_Id ){
         billService.createBill(account_Id,bill);
         Optional<Bill> optionalBill = billService.getBillById(bill.getId());
-//         if (!optionalBill.isPresent())
-//             throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bill");
-//
-//         if (bill != null)
-//
-//         if (optionalBill.isPresent())
-//
-//             throw new HttpException(HttpStatus.OK, "Successful");
 
     }
 
@@ -53,13 +40,9 @@ public class BillController {
         /* TODO: End of edit */
         billService.updateBill(bill, account_Id);
         Bill optionalBill = billService.getBillById(bill_id).get();
-//        if (optionalBill.toString() != bill.toString())
-//            throw new HttpException(HttpStatus.NOT_FOUND, "error updating bill");
 
         billService.updateBill(bill,account_Id);
-//
-//        if (optionalBill.toString() == bill.toString())
-//            throw new HttpException(HttpStatus.OK, "Successful");
+
     }
 
     @RequestMapping(value = "/bills/{billId}", method = RequestMethod.DELETE)
@@ -69,24 +52,12 @@ public class BillController {
         Long account_Id = bill.getAccount_id();
         /* TODO: End of edit */
         billService.deleteBill(bill_Id, account_Id);
-//       Optional<Bill> optionalBill = billService.getBillById(bill_Id);
-//       if(optionalBill.isPresent())
-//           throw new HttpException(HttpStatus.NOT_FOUND, "error deleting bill");
-//       if(!optionalBill.isPresent())
-//           throw new HttpException(HttpStatus.OK, "Successful");
+       Optional<Bill> optionalBill = billService.getBillById(bill_Id);
+
         billService.deleteBill(bill_Id,account_Id);
     }
 
-//@RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.GET)
-//    public void getAllBills (@PathVariable Long account_Id){
-//   Iterable<Bill> iterablebills = billService.getAllBills();
-//
-////   if (iterablebills.toString().isEmpty())
-////       throw new HttpException(HttpStatus.NOT_FOUND, "error getting bills");
-////  if(!iterablebills.toString().isEmpty())
-////      throw new HttpException(HttpStatus.OK, "Successful");
-//
-//}
+
 
 
 }
