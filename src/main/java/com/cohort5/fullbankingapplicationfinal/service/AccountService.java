@@ -38,9 +38,8 @@ public class AccountService {
     }
 
     //create account method
-    public Account createAccount(Long customer_id, Account account){
+    public Account createAccount(Account account){
         accountRepository.save(account);
-        account.setCustomer_id(customer_id);
         return account;
     }
 

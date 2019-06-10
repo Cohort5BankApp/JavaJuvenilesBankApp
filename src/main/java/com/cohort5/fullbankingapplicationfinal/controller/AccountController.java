@@ -21,10 +21,10 @@ public class AccountController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Iterable<Account> getAllAccounts() {
         ArrayList<Account> arrayList = accountService.getAllAccounts();
-        if (arrayList.size() < 1)
-            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching accounts");
-        if (arrayList.size() > 0)
-            throw new HttpException(HttpStatus.OK, "Success");
+//        if (arrayList.size() < 1)
+//            throw new HttpException(HttpStatus.NOT_FOUND, "error fetching accounts");
+//        if (arrayList.size() > 0)
+//            throw new HttpException(HttpStatus.OK, "Success");
         return accountService.getAllAccounts();
     }
 
@@ -74,15 +74,15 @@ public class AccountController {
     }
 
     //create an account method
-    @RequestMapping(value = "/{customerId}/accounts", method = RequestMethod.POST)
-    public Account createAccount(@RequestBody Account account, @PathVariable Long customerId ){
-        Account account1 = accountService.createAccount(customerId, account);
+    @RequestMapping(value = "/createAccount", method = RequestMethod.POST)
+    public Account createAccount(@RequestBody Account account){
+        Account account1 = accountService.createAccount(account);
         Long account_id = account1.getAccount_id();
         Optional<Account> optionalAccount = accountService.getAccountById(account_id);
-        if(!optionalAccount.isPresent())
-            throw new HttpException(HttpStatus.NOT_FOUND, "error creating customers account");
-        if(optionalAccount.isPresent())
-            throw new HttpException(HttpStatus.OK, "Success creating account id: " + optionalAccount.get().getAccount_id());
+//        if(!optionalAccount.isPresent())
+//            throw new HttpException(HttpStatus.NOT_FOUND, "error creating customers account");
+//        if(optionalAccount.isPresent())
+//            throw new HttpException(HttpStatus.OK, "Success creating account id: " + optionalAccount.get().getAccount_id());
             return account1;
     }
 
