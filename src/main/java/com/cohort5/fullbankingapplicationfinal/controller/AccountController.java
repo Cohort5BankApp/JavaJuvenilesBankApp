@@ -16,19 +16,7 @@ import java.util.Optional;
 public class AccountController {
     @Autowired
     private AccountService accountService;
-
-    //inside is what is happening when there is an exception error
-    @GetMapping("/age")
-    ResponseEntity<String> age(@RequestParam("yearOfBirth") int yearOfBirth) {
-        if (isInFuture(yearOfBirth)) {
-            return ResponseEntity.badRequest()
-                    .body("Year of birth cannot be in the future");
-        }
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body("Your age is " + calculateAge(yearOfBirth));
-    }
-
+    
     //get all accounts method
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Iterable<Account> getAllAccounts() {
