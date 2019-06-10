@@ -18,7 +18,7 @@ public class BillController {
     @Autowired
     private BillService billService;
 
-    @RequestMapping(value = "/bills/{bill_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/bills/{billId}", method = RequestMethod.GET)
     public Optional<Bill> getBill (@PathVariable Long bill_id){
        Optional<Bill> optionalBill = billService.getBillById(bill_id);
 //
@@ -31,7 +31,7 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "/accounts/{account_Id}/bills", method = RequestMethod.POST)
+    @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.POST)
     public void createBill(@RequestBody Bill bill, @PathVariable Long account_Id ){
         billService.createBill(account_Id,bill);
         Optional<Bill> optionalBill = billService.getBillById(bill.getId());
@@ -46,7 +46,7 @@ public class BillController {
 
     }
 
-    @RequestMapping(value = "/bills/{bill_id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/bills/{billId}", method = RequestMethod.PUT)
     public void updateBill(@RequestBody Bill bill, @PathVariable Long bill_id) {
         /*TODO: adding code to get account id*/
         Long account_Id = bill.getAccount_id();
@@ -62,7 +62,7 @@ public class BillController {
 //            throw new HttpException(HttpStatus.OK, "Successful");
     }
 
-    @RequestMapping(value = "/bills/{bill_Id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/bills/{billId}", method = RequestMethod.DELETE)
     public void deleteBill(@PathVariable Long bill_Id){
         /*TODO: adding code to get account id*/
         Bill bill = billService.getBillById(bill_Id).get();
@@ -77,7 +77,7 @@ public class BillController {
         billService.deleteBill(bill_Id,account_Id);
     }
 
-//@RequestMapping(value = "/accounts/{account_Id}/bills", method = RequestMethod.GET)
+//@RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.GET)
 //    public void getAllBills (@PathVariable Long account_Id){
 //   Iterable<Bill> iterablebills = billService.getAllBills();
 //
