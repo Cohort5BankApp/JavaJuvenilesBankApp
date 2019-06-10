@@ -4,7 +4,6 @@ import com.cohort5.fullbankingapplicationfinal.model.*;
 import com.cohort5.fullbankingapplicationfinal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -21,6 +20,9 @@ public class AccountService {
     private WithdrawalRepository withdrawalRepository;
     @Autowired
     private BillRepository billRepository;
+
+
+
 
     //get all account method
     public ArrayList<Account> getAllAccounts(){
