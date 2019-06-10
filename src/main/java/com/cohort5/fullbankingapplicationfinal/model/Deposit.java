@@ -1,12 +1,10 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
 
-import org.apache.tomcat.jni.Status;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.lang.reflect.Type;
+
 
 @Entity
 public class Deposit{
@@ -15,13 +13,13 @@ public class Deposit{
     @GeneratedValue
     private Long id;
 
-    private enum type {
+    private enum Type {
         p2p, deposit, withdraws
     }
 
     private Type type;
     private String transaction_date;
-    private enum status{
+    private enum Status{
         pending, cancelled, completed, reccuring
     }
     private Status status;
