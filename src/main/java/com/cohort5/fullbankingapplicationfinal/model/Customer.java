@@ -14,8 +14,10 @@ public class Customer {
 	@Id
 	private Long customer_id;
 
+	@NotNull
 	private String first_name;
 
+	@NotNull
 	private String last_name;
 
 

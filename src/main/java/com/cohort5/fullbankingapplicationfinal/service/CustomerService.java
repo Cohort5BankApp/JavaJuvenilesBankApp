@@ -1,13 +1,17 @@
 package com.cohort5.fullbankingapplicationfinal.service;
 
+import com.cohort5.fullbankingapplicationfinal.exception.HttpException;
 import com.cohort5.fullbankingapplicationfinal.model.Account;
 import com.cohort5.fullbankingapplicationfinal.model.Bill;
 import com.cohort5.fullbankingapplicationfinal.model.Customer;
+import com.cohort5.fullbankingapplicationfinal.model.Message;
 import com.cohort5.fullbankingapplicationfinal.repository.AccountRepository;
 import com.cohort5.fullbankingapplicationfinal.repository.BillRepository;
 import com.cohort5.fullbankingapplicationfinal.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -21,6 +25,8 @@ public class CustomerService {
     private AccountRepository accountRepository;
     @Autowired
     private BillRepository billRepository;
+
+
 
     public ArrayList<Account> getAccountsByCustomer(Long customer_id) {
         Customer customer = customerRepository.findById(customer_id).get();
