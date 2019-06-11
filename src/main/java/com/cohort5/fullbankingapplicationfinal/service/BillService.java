@@ -19,10 +19,14 @@ public class BillService {
     AccountRepository accountRepository;
 
     public void createBill(Long account_Id,Bill bill) {
+        Account account = accountRepository.findById(account_Id).get();
+        double newBill =  account.getBalance() - bill.getPayment_amount();
+        account.setBalance(newBill);
         billRepository.save(bill);
-      Account account = accountRepository.findById(account_Id).get();
-     double newBill =  account.getBalance() - bill.getPayment_amount();
-     account.setBalance(newBill);
+//      Account account = accountRepository.findById(account_Id).get();
+//     double newBill =  account.getBalance() - bill.getPayment_amount();
+//     account.setBalance(newBill);
+    billRepository.findById(bill.getId());
     }
 
     public Optional<Bill> getBillById(Long bill_id){
@@ -34,17 +38,19 @@ public class BillService {
      }
 
      public void updateBill(Bill bill, Long account_Id){
-        billRepository.save(bill);
+
         Account account = accountRepository.findById(account_Id).get();
         Double newBill = account.getBalance() - bill.getPayment_amount();
         account.setBalance(newBill);
+        billRepository.save(bill);
+       billRepository.findById(bill.getId());
      }
 
      public void deleteBill(Long bill_id, Long account_Id){
-        billRepository.deleteById(bill_id);
         Account account = accountRepository.findById(account_Id).get();
         Bill bill = billRepository.findById(bill_id).get();
         double returnMoney = account.getBalance() + bill.getPayment_amount();
         account.setBalance(returnMoney);
+         billRepository.deleteById(bill_id);
      }
 }
