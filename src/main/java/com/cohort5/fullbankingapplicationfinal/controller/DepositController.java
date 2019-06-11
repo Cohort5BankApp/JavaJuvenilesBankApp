@@ -29,6 +29,7 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.GET)
+
     public ResponseEntity<?> getDepositById(@PathVariable Long depositId){
        Message message = new Message(HttpStatus.OK.value(),"Success",depositService.getDepositById(depositId));
        return new ResponseEntity<>(message,HttpStatus.OK);
@@ -39,6 +40,7 @@ public class DepositController {
         Message message = new Message(HttpStatus.OK.value(),"Success", depositService.getDepositById(depositId));
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
+  
     @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteDeposit(@PathVariable Long deposit_Id){
         /*TODO: editing to extract correct account number from deposit */
@@ -46,7 +48,10 @@ public class DepositController {
         Long account_id = depositCheck.getAccount_id();
         /* End of edit */
         depositService.deleteDeposit(deposit_Id,account_id);
+
         Message message = new Message(HttpStatus.OK.value(),"Success");
        return new ResponseEntity<>(message, HttpStatus.OK);
+
+
     }
 }

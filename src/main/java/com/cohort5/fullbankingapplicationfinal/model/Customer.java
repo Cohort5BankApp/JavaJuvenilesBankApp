@@ -3,6 +3,7 @@ package com.cohort5.fullbankingapplicationfinal.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
@@ -17,13 +18,15 @@ public class Customer {
 
 	private String last_name;
 
+
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<Address> addresses;
+	Set<Address> addresses;
+
 
 	public Customer() {
 	}
 
-	public Customer(Long customer_id, String first_name, String last_name, List<Address> addresses) {
+	public Customer(Long customer_id, String first_name, String last_name, Set<Address> addresses) {
 		this.customer_id = customer_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -54,11 +57,11 @@ public class Customer {
 		this.last_name = last_name;
 	}
 
-	public List<Address> getAddresses() {
+	public Set<Address> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(List<Address> addresses) {
+	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 }
