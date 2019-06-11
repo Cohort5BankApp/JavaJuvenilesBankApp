@@ -40,7 +40,8 @@ public class AccountService {
     }
 
     //create account method
-    public Account createAccount(Account account){
+    public Account createAccount(Account account, Long customer_id){
+        account.setCustomer_id(customer_id);
         accountRepository.save(account);
         return account;
     }
