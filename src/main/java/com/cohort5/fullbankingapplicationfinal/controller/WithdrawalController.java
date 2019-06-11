@@ -30,6 +30,7 @@ public class WithdrawalController {
 
     @RequestMapping(path = "/accounts/{accountId}/withdrawals", method = RequestMethod.POST)
     public ResponseEntity<?> createWithdrawal(@PathVariable Long accountId, @RequestBody Withdrawal withdrawal) {
+        withdrawal.setAccount_id(accountId);
         withdrawalService.createWithdrawal(accountId, withdrawal);
         Message message = new Message(HttpStatus.CREATED.value(), "Success", withdrawalService.getWithdrawalById(withdrawal.getId()));
         return new ResponseEntity<>(message, HttpStatus.CREATED);
