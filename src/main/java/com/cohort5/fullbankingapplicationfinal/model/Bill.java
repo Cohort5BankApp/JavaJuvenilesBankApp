@@ -1,6 +1,8 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,15 +17,23 @@ public class Bill {
     private enum Status {
         pending, cancelled, completed, reccuring
     }
-
+    @NotNull
     private Status status;
+    @NotNull
     private String payee;
+    @NotNull
     private String nickname;
+    @NotNull
     private String creation_date;
+    @NotNull
     private String payment_date;
+    @NotNull
     private Integer recurring_date;
+    @NotNull
     private String upcoming_payment_date;
+    @NotNull
     private Double payment_amount;
+    @NotNull
     private Long account_id;
 
     public Bill() {

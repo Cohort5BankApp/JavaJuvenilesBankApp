@@ -1,5 +1,7 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,18 +16,25 @@ public class Withdrawal {
     private enum Type{
         p2p, deposit, withdrawal
     }
+    @NotNull
     private Type type;
+    @NotNull
     private String transaction_date;
     private enum Status{
         pending, cancelled, completed, reccuring
     }
+    @NotNull
     private Status status;
+    @NotNull
     private Long account_id;
     private enum Medium{
         balance, rewards
     }
+    @NotNull
     private Medium medium;
+    @NotNull
     private Double amount;
+    @NotNull
     private String description;
 
     public Withdrawal() {

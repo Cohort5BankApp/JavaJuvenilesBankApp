@@ -6,6 +6,7 @@ public class Message {
 
     private int code;
     private String message;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
 
