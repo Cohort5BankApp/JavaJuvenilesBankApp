@@ -3,6 +3,7 @@ package com.cohort5.fullbankingapplicationfinal.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Account {
@@ -11,18 +12,23 @@ public class Account {
 	@Id
 	private Long account_id;
 
+	@NotNull
 	private Type type;
 
 	private enum Type {
 		Savings,Checking,Credit
 	}
 
+	@NotNull
 	private String nickname;
 
+	@NotNull
 	private Integer rewards;
 
+	@NotNull
 	private Double balance;
 
+	@NotNull
 	private Long customer_id;
 
 	public Account (){}

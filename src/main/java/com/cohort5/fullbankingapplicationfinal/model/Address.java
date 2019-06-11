@@ -3,6 +3,7 @@ package com.cohort5.fullbankingapplicationfinal.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Address {
@@ -12,10 +13,19 @@ public class Address {
 	@Id
 	private Long address_id;
 
+	@NotNull
 	private String street_number;
+
+	@NotNull
 	private String street_name;
+
+	@NotNull
 	private String city;
+
+	@NotNull
 	private String state;
+
+	@NotNull
 	private String zip;
 
 	public Address(){}
