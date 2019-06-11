@@ -32,7 +32,7 @@ public class BillController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.POST)
-    public void createBill(@RequestBody Bill bill, @PathVariable Long account_id ){
+    public void createBill(@RequestBody Bill bill, @PathVariable("accountId") Long account_id ){
         billService.createBill(account_id,bill);
 //        Optional<Bill> optionalBill = billService.getBillById(bill.getId());
 //         if (!optionalBill.isPresent())
