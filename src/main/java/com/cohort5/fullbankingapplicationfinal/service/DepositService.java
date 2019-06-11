@@ -15,29 +15,28 @@ public class DepositService {
     @Autowired
     public DepositRepository depositRepository;
     @Autowired
-    public AccountRepository accountRepository;
-    @Autowired
     public AccountService accountService;
 
     public Optional<Deposit> getDepositById(Long deposit_id){
         return depositRepository.findById(deposit_id);
     }
     public void createDeposit(Long account_id, Deposit deposit){
-        depositRepository.save(deposit);
         deposit.setAccount_id(account_id);
         Account account = accountService.getAccountById(account_id).get();
         account.setBalance(deposit.getAmount() + account.getBalance());
-    }
-    public void updateDeposit(Long account_Id, Deposit deposit){
         depositRepository.save(deposit);
-        Account account = accountRepository.findById(account_Id).get();
-        Double newBalance = account.getBalance() - deposit.getAmount();
+    }
+    public void updateDeposit(Deposit deposit){
+        Long accountId = deposit.getAccount_id();
+        Account account = accountService.getAccountById(accountId).get();
+        Deposit deposit1 = depositRepository.findById(deposit.getId()).get();
+        Double newBalance = (account.getBalance() - deposit1.getAmount()) + deposit.getAmount();
         account.setBalance(newBalance);
+        depositRepository.save(deposit);
     }
     public void deleteDeposit(Long account_id,Long deposit_id){
-        getDepositById(deposit_id);
          Deposit deposit = depositRepository.findById(deposit_id).get();
-         Account account = accountRepository.findById(account_id).get();
+         Account account = accountService.getAccountById(account_id).get();
          account.setBalance(account.getBalance() - deposit.getAmount());
         depositRepository.delete(getDepositById(deposit_id).get());
     }
