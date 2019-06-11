@@ -32,8 +32,8 @@ public class BillController {
     }
 
     @RequestMapping(value = "/accounts/{accountId}/bills", method = RequestMethod.POST)
-    public void createBill(@RequestBody Bill bill, @PathVariable Long account_Id ){
-        billService.createBill(account_Id,bill);
+    public void createBill(@RequestBody Bill bill, @PathVariable Long account_id ){
+        billService.createBill(account_id,bill);
 //        Optional<Bill> optionalBill = billService.getBillById(bill.getId());
 //         if (!optionalBill.isPresent())
 //             throw new HttpException(HttpStatus.NOT_FOUND, "error fetching bill");
