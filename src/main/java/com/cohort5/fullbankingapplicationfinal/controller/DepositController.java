@@ -19,11 +19,17 @@ public class DepositController {
     @Autowired
     DepositService depositService;
 
+    protected void verifyDeposit(Long depositId){
+
+    }
+
     @RequestMapping(value = "/accounts/{accountId}/deposits", method = RequestMethod.POST)
     public ResponseEntity<?> createDeposit(@PathVariable Long accountId, @RequestBody Deposit deposit){
         depositService.createDeposit(accountId,deposit);
-        Message message = new Message(HttpStatus.OK.value(),"Success",depositService.getDepositById(deposit.getId()));
-        return new ResponseEntity<>(message,HttpStatus.OK);
+        Optional<Deposit> deposit1 = depositService.getDepositById(deposit.getId());
+        Message message = new Message(HttpStatus.CREATED.value(),"Success",deposit1);
+        verifyDeposit(deposit.getId());
+        return new ResponseEntity<>(message,HttpStatus.CREATED);
 
 
     }
@@ -36,18 +42,18 @@ public class DepositController {
     }
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateDeposit(@PathVariable Long depositId, @RequestBody Deposit deposit){
-        depositService.updateDeposit(depositId,deposit);
+        depositService.updateDeposit(deposit);
         Message message = new Message(HttpStatus.OK.value(),"Success", depositService.getDepositById(depositId));
         return new ResponseEntity<>(message,HttpStatus.OK);
     }
   
-    @RequestMapping(value = "/deposits/{depositsId}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteDeposit(@PathVariable Long deposit_Id){
+    @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteDeposit(@PathVariable Long depositId){
         /*TODO: editing to extract correct account number from deposit */
-        Deposit depositCheck = depositService.getDepositById(deposit_Id).get();
+        Deposit depositCheck = depositService.getDepositById(depositId).get();
         Long account_id = depositCheck.getAccount_id();
         /* End of edit */
-        depositService.deleteDeposit(deposit_Id,account_id);
+        depositService.deleteDeposit(account_id,depositId);
 
         Message message = new Message(HttpStatus.OK.value(),"Success");
        return new ResponseEntity<>(message, HttpStatus.OK);

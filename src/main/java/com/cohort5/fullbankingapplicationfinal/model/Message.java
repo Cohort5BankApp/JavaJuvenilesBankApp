@@ -1,9 +1,13 @@
 package com.cohort5.fullbankingapplicationfinal.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 public class Message {
 
     private int code;
     private String message;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
 
     public Message(int code, String message, Object data) {
