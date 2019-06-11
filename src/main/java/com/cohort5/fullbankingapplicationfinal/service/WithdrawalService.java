@@ -18,16 +18,16 @@ public class WithdrawalService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Optional<Withdrawal> getWithdrawalById(Long withdrawal_id) {
-        return withdrawalRepository.findById(withdrawal_id);
+    public Optional<Withdrawal> getWithdrawalById(Long id) {
+        return withdrawalRepository.findById(id);
     }
 
-    public void createWithdrawal(Long account_id, Withdrawal withdrawal) {
-        withdrawalRepository.save(withdrawal);
-        withdrawal.setId(account_id);
-        Account account = accountRepository.findById(account_id).get();
-        Double newBalance = account.getBalance() - withdrawal.getAmount();
-        account.setBalance(newBalance);
+    public Withdrawal createWithdrawal(Long account_id, Withdrawal withdrawal) {
+        return withdrawalRepository.save(withdrawal);
+//        withdrawal.setId(account_id);
+//        Account account = accountRepository.findById(account_id).get();
+//        Double newBalance = account.getBalance() - withdrawal.getAmount();
+//        account.setBalance(newBalance);
     }
 
     public void updateWithdrawal(Long account_id, Withdrawal withdrawal) {

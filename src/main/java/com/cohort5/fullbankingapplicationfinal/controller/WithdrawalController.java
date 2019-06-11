@@ -18,32 +18,32 @@ public class WithdrawalController {
     private WithdrawalService withdrawalService;
 
 
-    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.GET)
+    @RequestMapping(path = "/withdrawals/{id}", method = RequestMethod.GET)
     public Optional<Withdrawal> getWithdrawalById(@PathVariable Long id) {
-        Optional optional = withdrawalService.getWithdrawalById(id);
+        return withdrawalService.getWithdrawalById(id);
 //        if(!optional.isPresent())
 //            throw new HttpException(HttpStatus.NOT_FOUND, "Error fetching withdrawal");
 //        if(optional.isPresent())
 //            throw new HttpException(HttpStatus.OK, "Success");
-        return optional;
+        //return optional;
     }
 
     /* TODO: adding RequestMethod.POST to RequestMethod */
-    @RequestMapping(path = "/accounts/{accountId}/withdrawals", method = RequestMethod.POST)
-    public Optional<Withdrawal> createWithdrawal(@RequestBody Long account_id, @RequestBody Withdrawal withdrawal) {
+    @RequestMapping(path = "/accounts/{account_id}/withdrawals", method = RequestMethod.POST)
+    public void createWithdrawal(@PathVariable Long account_id, @RequestBody Withdrawal withdrawal) {
         withdrawalService.createWithdrawal(account_id,withdrawal);
-        Optional<Withdrawal> optional = withdrawalService.getWithdrawalById(withdrawal.getId());
+        //Optional<Withdrawal> optional = withdrawalService.getWithdrawalById(withdrawal.getId());
 //        if(!optional.isPresent())
 //            throw new HttpException(HttpStatus.NOT_FOUND, "Error creating withdrawal");
 //        if(optional.isPresent())
 //            throw new HttpException(HttpStatus.CREATED, "Success");
-        return optional;
+        //return optional;
     }
 
-    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.PUT)
-    public Withdrawal updateWithdrawal(@RequestBody Withdrawal withdrawal) {
+    @RequestMapping(path = "/withdrawals/{id}", method = RequestMethod.PUT)
+    public Withdrawal updateWithdrawal(@PathVariable Long account_id, @RequestBody Withdrawal withdrawal) {
         /* TODO: adding line 47 to pull the account id from the withdrawal */
-        Long account_id = withdrawal.getAccount_id();
+        account_id = withdrawal.getAccount_id();
         /* End of edit */
         withdrawalService.updateWithdrawal(account_id, withdrawal);
         Withdrawal optional = withdrawalService.getWithdrawalById(withdrawal.getId()).get();
@@ -55,7 +55,7 @@ public class WithdrawalController {
     }
 
     /*TODO: change RequestMethod from .get to .delete */
-    @RequestMapping(path = "/withdrawals/{withdrawalId}", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/withdrawals/{withdrawal_id}", method = RequestMethod.DELETE)
     public void deleteWithdrawal(@PathVariable Long withdrawal_id) {
         /*TODO: editing method to pull correct account_id */
         Withdrawal withdrawalCheck = withdrawalService.getWithdrawalById(withdrawal_id).get();
