@@ -1,17 +1,12 @@
 package com.cohort5.fullbankingapplicationfinal.controller;
 
-import com.cohort5.fullbankingapplicationfinal.exception.HttpException;
 import com.cohort5.fullbankingapplicationfinal.model.Message;
 import com.cohort5.fullbankingapplicationfinal.model.Withdrawal;
-import com.cohort5.fullbankingapplicationfinal.repository.WithdrawalRepository;
 import com.cohort5.fullbankingapplicationfinal.service.WithdrawalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.html.Option;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
