@@ -1,5 +1,6 @@
 package com.cohort5.fullbankingapplicationfinal.controller;
 
+import com.cohort5.fullbankingapplicationfinal.exception.CustomException;
 import com.cohort5.fullbankingapplicationfinal.exception.ExceptionThrower;
 //import com.cohort5.fullbankingapplicationfinal.exception.GeneralErrorException;
 //import com.cohort5.fullbankingapplicationfinal.exception.HttpException;
@@ -35,7 +36,7 @@ public class CustomerController {
 //    }
 
     @PostMapping(value = "/customers")
-    public ResponseEntity createCustomer(@RequestBody Customer customer) throws Exception{
+    public ResponseEntity createCustomer(@RequestBody Customer customer) throws Exception {
         Customer createdCustomer = customerService.createCustomer(customer);
 //        Long customer_id = createdCustomer.getCustomer_id();
 //        verifyCustomer(customer_id);
@@ -43,7 +44,9 @@ public class CustomerController {
 //        return new ResponseEntity<>(message, HttpStatus.CREATED);
 
         ExceptionThrower exceptionThrower = new ExceptionThrower();
-        exceptionThrower.throwGeneralException();
+        if(createdCustomer == null) {
+            exceptionThrower.throwCustomException();
+        }
 
         return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }

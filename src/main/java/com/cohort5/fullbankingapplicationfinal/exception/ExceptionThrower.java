@@ -10,7 +10,7 @@ public class ExceptionThrower {
     public void throwCustomException() throws CustomException {
         CustomException e = new CustomException();
         e.setCode(404);
-        e.setMessage("Custom works");
+        e.setMessage("Error");
         throw e;
     }
 

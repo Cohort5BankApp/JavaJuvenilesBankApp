@@ -13,7 +13,7 @@ public class ErrorHandlingController {
         ExceptionResponse error = new ExceptionResponse();
         error.setCode(HttpStatus.NOT_FOUND.value());
         error.setDescription("Error");
-        return new ResponseEntity<ExceptionResponse>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
 }
