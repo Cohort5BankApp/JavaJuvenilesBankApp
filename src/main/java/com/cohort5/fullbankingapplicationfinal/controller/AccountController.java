@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 //@RequestMapping("/accounts")
 public class AccountController {
-    @Autowired
+    @Autowired //gets rid of the setter methods
     private AccountService accountService;
 
     //get all accounts method
@@ -62,7 +62,7 @@ public class AccountController {
     //Optional<Account>
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccount(@RequestBody Account account, @PathVariable Long customerId){
-    Message message = new Message(HttpStatus.OK.value(),"Success", accountService.createAccount(account));
+    Message message = new Message(HttpStatus.OK.value(),"Success", accountService.createAccount(account, customerId));
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
