@@ -1,15 +1,11 @@
 package com.cohort5.fullbankingapplicationfinal.controller;
 
-import com.cohort5.fullbankingapplicationfinal.exception.HttpException;
 import com.cohort5.fullbankingapplicationfinal.model.*;
 import com.cohort5.fullbankingapplicationfinal.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Optional;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController

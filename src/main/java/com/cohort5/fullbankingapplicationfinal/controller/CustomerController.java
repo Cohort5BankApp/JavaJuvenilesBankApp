@@ -1,7 +1,5 @@
 package com.cohort5.fullbankingapplicationfinal.controller;
 
-import com.cohort5.fullbankingapplicationfinal.exception.HttpException;
-import com.cohort5.fullbankingapplicationfinal.exception.RecordNotFoundException;
 import com.cohort5.fullbankingapplicationfinal.model.Account;
 import com.cohort5.fullbankingapplicationfinal.model.Bill;
 import com.cohort5.fullbankingapplicationfinal.model.Customer;
@@ -13,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -26,12 +23,6 @@ public class CustomerController {
     private CustomerService customerService;
     @Autowired
     private BillService billService;
-
-    public void verifyCustomer(Long customer_id) throws HttpException{
-        Optional<Customer> customer = customerService.getCustomerById(customer_id);
-        if (!customer.isPresent())
-            throw new HttpException();
-    }
 
     @PostMapping(value = "/customers")
     public ResponseEntity createCustomer(@RequestBody Customer customer) {
@@ -54,27 +45,12 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/customers/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long customer_id){
+    public ResponseEntity getCustomerById(@PathVariable("id") Long customer_id){
         Optional<Customer> customer = customerService.getCustomerById(customer_id);
-        if(!customer.isPresent()) {
-            throw new RecordNotFoundException("Error fetching account");
-        }
-        return new ResponseEntity(customer, HttpStatus.OK);
-//            Message message = new Message(HttpStatus.OK.value(), "Success", customer);
-//            return new ResponseEntity<>(message, HttpStatus.OK);
-//        try {
-//            verifyCustomer(customer_id);
-//
-//
-//        } catch (HttpException http) {
-//            http.setStatus(HttpStatus.NOT_FOUND);
-//            http.setMessage("Error fetching customer with id: " + customer_id);
-//        } finally {
-//            Optional<Customer> customer = customerService.getCustomerById(customer_id);
-//            Message message = new Message(HttpStatus.OK.value(), "Success", customer);
-//            return new ResponseEntity<>(message, HttpStatus.OK);
-//        }
+        Message message = new Message(HttpStatus.OK.value(), "Success", customer);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
     @PutMapping(value = "/customers/{id}")
     public ResponseEntity updateCustomer(@PathVariable("id") Long customer_id, @RequestBody Customer customer){
         Optional<Customer> originalCustomer = customerService.getCustomerById(customer_id);
