@@ -2,7 +2,7 @@ package com.cohort5.fullbankingapplicationfinal.exception;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class ExceptionResponse {
 
     private int code;

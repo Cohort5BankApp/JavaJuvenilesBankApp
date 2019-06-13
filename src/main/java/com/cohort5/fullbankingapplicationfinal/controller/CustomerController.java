@@ -1,10 +1,4 @@
 package com.cohort5.fullbankingapplicationfinal.controller;
-
-import com.cohort5.fullbankingapplicationfinal.exception.CustomException;
-import com.cohort5.fullbankingapplicationfinal.exception.ExceptionThrower;
-//import com.cohort5.fullbankingapplicationfinal.exception.GeneralErrorException;
-//import com.cohort5.fullbankingapplicationfinal.exception.HttpException;
-//import com.cohort5.fullbankingapplicationfinal.exception.RecordNotFoundException;
 import com.cohort5.fullbankingapplicationfinal.model.Account;
 import com.cohort5.fullbankingapplicationfinal.model.Bill;
 import com.cohort5.fullbankingapplicationfinal.model.Customer;
@@ -36,19 +30,14 @@ public class CustomerController {
 //    }
 
     @PostMapping(value = "/customers")
-    public ResponseEntity createCustomer(@RequestBody Customer customer) throws Exception {
+    public ResponseEntity createCustomer(@RequestBody Customer customer) {
         Customer createdCustomer = customerService.createCustomer(customer);
 //        Long customer_id = createdCustomer.getCustomer_id();
 //        verifyCustomer(customer_id);
-//        Message message = new Message(HttpStatus.CREATED.value(), "Success", createdCustomer);
-//        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        Message message = new Message(HttpStatus.CREATED.value(), "Success", createdCustomer);
+        return new ResponseEntity<>(message, HttpStatus.CREATED);
 
-        ExceptionThrower exceptionThrower = new ExceptionThrower();
-        if(createdCustomer == null) {
-            exceptionThrower.throwCustomException();
-        }
-
-        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
+        //return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/customers")

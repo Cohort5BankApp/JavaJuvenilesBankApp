@@ -31,7 +31,6 @@ public class DepositController {
     }
 
     @RequestMapping(value = "/deposits/{depositId}", method = RequestMethod.GET)
-
     public ResponseEntity<?> getDepositById(@PathVariable Long depositId){
        Message message = new Message(HttpStatus.OK.value(),"Success",depositService.getDepositById(depositId));
        return new ResponseEntity<>(message,HttpStatus.OK);
