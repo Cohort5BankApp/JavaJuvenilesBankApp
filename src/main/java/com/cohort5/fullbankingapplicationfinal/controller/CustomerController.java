@@ -27,17 +27,10 @@ public class CustomerController {
     @Autowired
     private BillService billService;
 
-    public void verifyCustomer(Long customer_id) throws HttpException{
-        Optional<Customer> customer = customerService.getCustomerById(customer_id);
-        if (!customer.isPresent())
-            throw new HttpException();
-    }
 
     @PostMapping(value = "/customers")
     public ResponseEntity createCustomer(@RequestBody Customer customer) {
         Customer createdCustomer = customerService.createCustomer(customer);
-        Long customer_id = createdCustomer.getCustomer_id();
-//        verifyCustomer(customer_id);
         Message message = new Message(HttpStatus.CREATED.value(), "Success", createdCustomer);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
@@ -56,24 +49,11 @@ public class CustomerController {
     @GetMapping(value = "/customers/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long customer_id){
         Optional<Customer> customer = customerService.getCustomerById(customer_id);
-        if(!customer.isPresent()) {
-            throw new RecordNotFoundException("Error fetching account");
-        }
+
+            Message message = new Message(HttpStatus.OK.value(), "Success", customer);
+            return new ResponseEntity<>(message, HttpStatus.OK);
+
         return new ResponseEntity(customer, HttpStatus.OK);
-//            Message message = new Message(HttpStatus.OK.value(), "Success", customer);
-//            return new ResponseEntity<>(message, HttpStatus.OK);
-//        try {
-//            verifyCustomer(customer_id);
-//
-//
-//        } catch (HttpException http) {
-//            http.setStatus(HttpStatus.NOT_FOUND);
-//            http.setMessage("Error fetching customer with id: " + customer_id);
-//        } finally {
-//            Optional<Customer> customer = customerService.getCustomerById(customer_id);
-//            Message message = new Message(HttpStatus.OK.value(), "Success", customer);
-//            return new ResponseEntity<>(message, HttpStatus.OK);
-//        }
     }
     @PutMapping(value = "/customers/{id}")
     public ResponseEntity updateCustomer(@PathVariable("id") Long customer_id, @RequestBody Customer customer){
