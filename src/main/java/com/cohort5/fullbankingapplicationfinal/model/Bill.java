@@ -39,7 +39,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Long id, Status status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, Long account_id) {
+    public Bill(Long id, Status status, String payee, String nickname, String creation_date, String payment_date, String recurring_date, String upcoming_payment_date, Double payment_amount, Long account_id) {
         this.id = id;
         this.status = status;
         this.payee = payee;
@@ -100,11 +100,11 @@ public class Bill {
         this.payment_date = payment_date;
     }
 
-    public Integer getRecurring_date() {
+    public String getRecurring_date() {
         return recurring_date;
     }
 
-    public void setRecurring_date(Integer recurring_date) {
+    public void setRecurring_date(String recurring_date) {
         this.recurring_date = recurring_date;
     }
 
