@@ -47,13 +47,12 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/customers/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long customer_id){
+    public ResponseEntity<?> getCustomerById(@PathVariable("id") Long customer_id){
         Optional<Customer> customer = customerService.getCustomerById(customer_id);
 
             Message message = new Message(HttpStatus.OK.value(), "Success", customer);
             return new ResponseEntity<>(message, HttpStatus.OK);
 
-        return new ResponseEntity(customer, HttpStatus.OK);
     }
     @PutMapping(value = "/customers/{id}")
     public ResponseEntity updateCustomer(@PathVariable("id") Long customer_id, @RequestBody Customer customer){
