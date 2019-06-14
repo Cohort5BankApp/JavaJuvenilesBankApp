@@ -1,6 +1,5 @@
 package com.cohort5.fullbankingapplicationfinal.service;
 
-import com.cohort5.fullbankingapplicationfinal.exception.HttpException;
 import com.cohort5.fullbankingapplicationfinal.model.Account;
 import com.cohort5.fullbankingapplicationfinal.model.Bill;
 import com.cohort5.fullbankingapplicationfinal.model.Customer;
