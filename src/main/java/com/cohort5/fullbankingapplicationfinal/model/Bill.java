@@ -28,7 +28,7 @@ public class Bill {
     @NotNull
     private String payment_date;
     @NotNull
-    private Integer recurring_date;
+    private String recurring_date;
     @NotNull
     private String upcoming_payment_date;
     @NotNull
