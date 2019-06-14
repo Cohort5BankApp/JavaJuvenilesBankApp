@@ -24,11 +24,10 @@ public class CustomerController {
     @Autowired
     private BillService billService;
 
+
     @PostMapping(value = "/customers")
     public ResponseEntity createCustomer(@RequestBody Customer customer) {
         Customer createdCustomer = customerService.createCustomer(customer);
-        Long customer_id = createdCustomer.getCustomer_id();
-//        verifyCustomer(customer_id);
         Message message = new Message(HttpStatus.CREATED.value(), "Success", createdCustomer);
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
@@ -49,6 +48,7 @@ public class CustomerController {
         Optional<Customer> customer = customerService.getCustomerById(customer_id);
         Message message = new Message(HttpStatus.OK.value(), "Success", customer);
         return new ResponseEntity<>(message, HttpStatus.OK);
+
     }
 
     @PutMapping(value = "/customers/{id}")
